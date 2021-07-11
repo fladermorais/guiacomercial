@@ -1,0 +1,30 @@
+#imagem {
+    width: 150px;
+}
+#imagem img {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.dia_semana {
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.action {
+    display: flex;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+}
+
+.error {
+    color: red !important;
+    font-weight: bold;
+}
