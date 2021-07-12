@@ -15,16 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     'slack' => env('LOG_SLACK_WEBHOOK_URL'),
-
->>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
-=======
-    'slack' => env('LOG_SLACK_WEBHOOK_URL'),
-
->>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
     /*
     |--------------------------------------------------------------------------
     | Application Environment

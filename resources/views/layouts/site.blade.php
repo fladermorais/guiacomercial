@@ -7,16 +7,8 @@
     
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-<<<<<<< HEAD
-
     <meta name="facebook-domain-verification" content="unw5id2nd7pqfgz99p8irxljg2kux3" />
-    
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-=======
-    
-    <title>{{ config('app.name', 'Laravel') }}</title>
->>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
