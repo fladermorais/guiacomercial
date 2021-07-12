@@ -1,0 +1,10 @@
+.imagem {
+    border: 2px solid #ccc;
+    width: 100%;
+    height: 100px;
+}
+.imagem img {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+}

@@ -1,0 +1,47 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+
+class SubCategorias extends Model
+{
+
+    use Notifiable;
+
+    protected $fillable = [
+        'categoria_id', 
+        'nome', 
+        'alias', 
+        'descricao', 
+        'img', 
+        'status'
+    ];
+    protected $table = 'sub_categorias';
+
+    public function categorias()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+
+
+    public function geraAlias( $str ) 
+    {
+        $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
+        $palavra1 = str_replace(' ', '_', $palavra1);
+        $palavra1 = strtolower($palavra1);
+        return $palavra1;
+    }
+
+    public function routeNotificationForSlack($notification)
+    {
+<<<<<<< HEAD
+        return "https://hooks.slack.com/services/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";
+=======
+        return config('app.slack');
+>>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
+    }
+
+}
