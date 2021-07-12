@@ -58,7 +58,11 @@ class Empresa extends Model
     public function routeNotificationForSlack($notification)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return "https://hooks.slack.com/services/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";
+=======
+        return config('app.slack');
+>>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
 =======
         return config('app.slack');
 >>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72

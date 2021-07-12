@@ -10,4 +10,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 composer.lock
+<<<<<<< HEAD
 
+=======
+>>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
