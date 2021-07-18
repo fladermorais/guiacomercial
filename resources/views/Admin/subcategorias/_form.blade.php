@@ -31,7 +31,7 @@
     
     <div class="col-md-12">
       <label for="descricao">Descrição</label>
-      <textarea class='form-control' type="text" id="descricao" name="descricao">{{ (isset($categoria->descricao) ? $categoria->descricao : old('descricao') )}} </textarea>
+      <textarea class='form-control ckeditor' type="text" id="descricao" name="descricao">{{ (isset($categoria->descricao) ? $categoria->descricao : old('descricao') )}} </textarea>
       @if($errors->has('descricao'))
       @foreach($errors->get('descricao') as $e)
       {{$e}}

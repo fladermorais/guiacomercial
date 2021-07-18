@@ -51,35 +51,23 @@ class SubCategoriaController extends Controller
         }
         $data = $request->all();
         
-        $validator = Validator::make($data,
-        [
-            'nome'          =>  ['required'],
-            'categoria_id'  =>  ['required'],
-            'descricao'     =>  ['required'],
-            ]
-        );
-        
+        $categoria = new SubCategorias();
+        $validator = Validator::make($data, $categoria->rules());
         if($validator->fails()){
             flash('Preencha os campos obrigatórios')->warning();
             return redirect()->back()
             ->withErrors($validator)
             ->withInput();
         }
-
+        
         $categoriaPrincipal = Categoria::find($data['categoria_id']);
         if(!isset($categoriaPrincipal)){
             flash('Categoria não existe no sistema')->error();
             return redirect()->back()->withInput();
         }
         
-        $categoria = new SubCategorias();
-        $categoria->nome = $data['nome'];
-        $categoria->alias = $categoria->geraAlias($data['nome']);
-        $categoria->categoria_id = $data['categoria_id'];
-        $categoria->descricao = $data['descricao'];
-        $categoria->status = "sim";
-        $categoria->save();
-        if($categoria->id){
+        $response = $categoria->newInfo($data);
+        if($response){
             flash('Sub Categoria Cadastrada com sucesso!')->success();
             return redirect()->route('subCategorias.index');
         }
@@ -111,41 +99,28 @@ class SubCategoriaController extends Controller
         }
         $data = $request->all();
         
-        $validator = Validator::make($data,
-        [
-            'nome'  =>  ['required'],
-            'categoria_id'  =>  ['required'],
-            ]
-        );
-        
+        $validator = Validator::make($data, $categoria->rules());
         if($validator->fails()){
             return redirect()->route('subCategorias.index')
             ->withErrors($validator)
             ->withInput();
         }
+        
         $categoriaPrincipal = Categoria::find($data['categoria_id']);
         if(!isset($categoriaPrincipal)){
             flash('Categoria Principal não existe no sistema')->error();
             return redirect()->back()->withInput();
         }
         
-        $categoria->nome = $data['nome'];
-        $categoria->alias = $categoria->geraAlias($data['nome']);
-        $categoria->categoria_id = $data['categoria_id'];
-        $categoria->descricao = $data['descricao'];
-        $categoria->status = "sim";
-        $categoria->update();
-        if($categoria->getChanges()){
-
+        $response = $categoria->updateInfo($data);
+        if($response){
             \Notification::send($categoria, new NewAnnouncement("Categoria Alterada com sucesso no sistema!"));
-
             flash('Sub Categoria Atualizada com sucesso!')->success();
             return redirect()->route('subCategorias.index');
         } else {
             flash('Nenhuma mudança realizada!')->warning();
             return redirect()->route('subCategorias.index');
         }
-        
     }
     
     public function active($id)
@@ -159,11 +134,11 @@ class SubCategoriaController extends Controller
             return redirect()->back();
         }
         if($categoria->status == "sim"){
-            $categoria->status = "nao";
+            $data['status'] = "nao";
         } else {
-            $categoria->status = "sim";
+            $data['status'] = "sim";
         }
-        $categoria->update();
+        $categoria->updateInfo($data);
         flash('Categoria Atualizada com suceso')->success();
         return redirect()->route('subCategorias.index');
     }

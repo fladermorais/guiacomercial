@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\UploadArquivoTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 class SubCategorias extends Model
 {
-
+    
     use Notifiable;
-
+    
     protected $fillable = [
         'categoria_id', 
         'nome', 
@@ -19,25 +20,43 @@ class SubCategorias extends Model
         'status'
     ];
     protected $table = 'sub_categorias';
-
+    
+    public function rules()
+    {
+        return [
+            'nome'          =>  ['required'],
+            'categoria_id'  =>  ['required'],
+            'descricao'     =>  ['required'],
+        ];
+    }
+    
     public function categorias()
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
-
-
-
-    public function geraAlias( $str ) 
+    
+    public function newInfo($data)
     {
-        $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
-        $palavra1 = str_replace(' ', '_', $palavra1);
-        $palavra1 = strtolower($palavra1);
-        return $palavra1;
+        $trait = new UploadArquivoTrait;
+        $data['alias'] = $trait->getAlias($data['nome']);
+        $data['status'] = "sim";
+        $info = $this->create($data);
+        return $info;
     }
-
+    
+    public function updateInfo($data)
+    {
+        if(isset($data['nome'])){
+            $trait = new UploadArquivoTrait;
+            $data['alias'] = $trait->getAlias($data['nome']);
+        }
+        $info = $this->update($data);
+        return $info;
+    }
+    
     public function routeNotificationForSlack($notification)
     {
         return config('app.slack');
     }
-
+    
 }

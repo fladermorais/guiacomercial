@@ -5,17 +5,16 @@
         <div class="card-header">
             <h3>Cadastrar SubCategoria</h3>
         </div>
-        <div class="card-body">
-            <form action="{{route('subCategorias.store')}}" method="post" id="formulario" enctype="multipart/form-data">
-                {{csrf_field()}}
-                
+        <form action="{{route('subCategorias.store')}}" method="post" id="formulario" enctype="multipart/form-data">
+            @csrf
+            <div class="card-body">
                 @include('Admin.subcategorias._form')
-                
-                <div class="card-footer">
-                    <input class="btn btn-default" type="submit" value="Cadastrar">    
-                </div>
-            </form>
-        </div>
+            </div>
+            
+            <div class="card-footer">
+                <button class="btn btn-default" type="submit">Cadastrar</button>
+            </div>
+        </form>    
     </div>
 </div>
 @endsection
