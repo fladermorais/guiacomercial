@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UploadArquivoTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
@@ -11,13 +12,50 @@ class Categoria extends Model
         'alias', 
         'descricao', 
         'img',
+        'status',
     ];
     
-    public function geraAlias( $str ) 
+    public function rules()
     {
-        $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
-        $palavra1 = str_replace(' ', '_', $palavra1);
-        $palavra1 = strtolower($palavra1);
-        return $palavra1;
+        return [
+            'nome'      =>  "required",
+            'descricao' =>  "required",
+            'imagem'       =>  "required"
+        ];
+    }
+    
+    public function rulesUpdate()
+    {
+        $data = $this->rules();
+        unset($data['imagem']);
+        return $data;
+    }
+    
+    public function newInfo($data)
+    {
+        // dd($data);
+        $uploadArquivo = new UploadArquivoTrait;
+        $alias = $uploadArquivo->getAlias($data['nome']);
+        $data['img']    = $uploadArquivo->uploadArquivo($data['imagem'], $alias, "categorias");
+        $data['alias']  = $alias;
+        
+        $info = $this->create($data);
+        return $info;
+    }
+    
+    public function updateInfo($data)
+    {
+        $uploadArquivo = new UploadArquivoTrait;
+        if(isset($data['imagem'])){
+            $alias = $uploadArquivo->getAlias($data['nome']);
+            $data['alias']  = $alias;
+            
+            $remove = $uploadArquivo->unlinkArquivo($this->img, 'categorias');
+            
+            $data['img']    = $uploadArquivo->uploadArquivo($data['imagem'], $alias, "categorias");
+        }
+        
+        $info = $this->update($data);
+        return $info;
     }
 }

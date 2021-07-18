@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriaController extends Controller
 {
@@ -27,10 +28,10 @@ class CategoriaController extends Controller
             'palavra'   =>  $data['search'],
         ];
         return view('Admin.categorias.index', compact('categorias', 'resultado'));
-
-
+        
+        
     }
-
+    
     public function create()
     {
         if(Gate::denies('categorias.create')){
@@ -44,46 +45,25 @@ class CategoriaController extends Controller
         if(Gate::denies('categorias.create')){
             abort(403, "Não Autorizado");
         }
-        function geraAlias( $str ) {
-            $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
-            $palavra1 = str_replace(' ', '_', $palavra1);
-            $palavra1 = strtolower($palavra1);
-            return $palavra1;
-        }
         
         $data = $request->all();
+
         $categoria = new Categoria();
         
-        if($data['imagem']){
-            $file = $data['imagem'];
-            $extensao = $data['imagem']->getClientOriginalExtension();
-            $nome = $categoria->geraAlias($data['nome']).".".$extensao;
-            $path = public_path('/storage/categorias');
-            
-            $file->move($path, $nome);
-            
-            if(!$file){
-                return redirect()->back()->with('error', 'Falha ao fazer o upload')->withInput();
-            }
-        } else {
-            $nome = "";
+        $validator = Validator::make($data, $categoria->rules());
+        if($validator->fails()){
+            flash('Atente-se ao formulário')->warning();
+            return back()->withInput()->withErrors($validator);
         }
-        
-        
-        $categoria->nome = $data['nome'];
-        $categoria->alias = $categoria->geraAlias($data['nome']);
-        $categoria->descricao = $data['descricao'];
-        $categoria->status = "sim";
-        $categoria->img = $nome;
-        $categoria->save();
-        if($categoria->id){
+
+        $response = $categoria->newInfo($data);
+        if($response){
             flash('Categoria criada com sucesso!')->success();
             return redirect()->route('categorias.index');
         } else {
             flash('Erro ao cadastrar a categoria')->error();
             return redirect()->route('categorias.index');
-        }
-        
+        }        
     }
     
     public function edit($id)
@@ -111,39 +91,20 @@ class CategoriaController extends Controller
         }
         $data = $request->all();
         
-        if(isset($data['imagem'])){
-            if(isset($categoria->img)){
-                $caminho = public_path('/storage/anexo/');
-                $arquivo = $caminho.$categoria->img;
-                if(file_exists($arquivo)){
-                    unlink($arquivo);
-                }
-            }
-            $file = $data['imagem'];
-            $extensao = $data['imagem']->getClientOriginalExtension();
-            $nome = $categoria->geraAlias($data['nome']).".".$extensao;
-            $path = public_path('/storage/categorias');
-            
-            $file->move($path, $nome);
-            
-            if(!$file){
-                return redirect()->back()->with('error', 'Falha ao fazer o upload')->withInput();
-            }
-            $categoria->img = $nome;
+        $validator = Validator::make($data, $categoria->rulesUpdate());
+        if($validator->fails()){
+            flash('Atente-se ao formulário')->warning();
+            return back()->withInput()->withErrors($validator);
         }
-        
-        $categoria->nome = $data['nome'];
-        $categoria->alias = $categoria->geraAlias($data['nome']);
-        $categoria->descricao = $data['descricao'];
-        $categoria->status = "sim";
-        $categoria->update();
-        if($categoria->getChanges()){
+
+        $response = $categoria->updateInfo($data);
+        if($response){
             flash('Categoria atualizada com sucesso!')->success();
             return redirect()->route('categorias.index');
         } else {
-            flash('Nenhuma mudança realizada')->warning();
+            flash('Erro ao atualizar a categoria')->error();
             return redirect()->route('categorias.index');
-        }
+        }  
         
     }
     
@@ -158,12 +119,17 @@ class CategoriaController extends Controller
             return redirect()->back();
         }
         if($categoria->status == "sim"){
-            $categoria->status = "nao";
+            $data['status'] = "nao";
         } else {
-            $categoria->status = "sim";
+            $data['status'] = "sim";
         }
-        $categoria->update();
-        flash('Categoria Atualizada com suceso')->success();
+        $response = $categoria->updateInfo($data);
+        if($response){
+            flash('Categoria Atualizada com suceso')->success();
+        } else {
+            flash('Erro ao atualizar')->error();
+            return back();
+        }
         return redirect()->route('categorias.index');
     }
     
