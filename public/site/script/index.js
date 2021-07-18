@@ -68,4 +68,5 @@ function mytheme(index) {
 function changeColor(color) {
     $('#wrapper').removeClass();
     $('#wrapper').addClass(color);
+>>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
 }

@@ -7,7 +7,7 @@
     
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+    <meta name="facebook-domain-verification" content="unw5id2nd7pqfgz99p8irxljg2kux3" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     
     <!-- Scripts -->
