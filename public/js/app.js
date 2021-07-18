@@ -59886,9 +59886,8 @@ module.exports = function(module) {
 * includes Vue and other libraries. It is a great starting point when
 * building robust, powerful web applications using Vue and Laravel.
 */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // require('summernote');
 
-__webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -59911,18 +59910,17 @@ Vue.component('tabela-lista', __webpack_require__(/*! ./components/TabelaLista.v
 
 var app = new Vue({
   el: '#app'
-});
-$(document).ready(function () {
-  $('#descricao').summernote({
-    height: 200
-  });
-  $('#mensagem').summernote({
-    height: 200
-  });
-  $('#description').summernote({
-    height: 200
-  });
-});
+}); // $(document).ready(function() {
+//     $('#descricao').summernote({
+//         height: 200,
+//     });
+//     $('#mensagem').summernote({
+//         height: 200,
+//     });
+//     $('#description').summernote({
+//         height: 200,
+//     });
+// });
 
 /***/ }),
 

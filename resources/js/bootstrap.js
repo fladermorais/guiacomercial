@@ -11,7 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    require('summernote');
+    // require('summernote');
 } catch (e) {}
 
 /**

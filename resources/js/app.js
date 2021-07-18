@@ -5,7 +5,7 @@
 */
 
 require('./bootstrap');
-require('summernote');
+// require('summernote');
 
 window.Vue = require('vue');
 
@@ -33,14 +33,14 @@ const app = new Vue({
     el: '#app',
 });
 
-$(document).ready(function() {
-    $('#descricao').summernote({
-        height: 200,
-    });
-    $('#mensagem').summernote({
-        height: 200,
-    });
-    $('#description').summernote({
-        height: 200,
-    });
-});
+// $(document).ready(function() {
+//     $('#descricao').summernote({
+//         height: 200,
+//     });
+//     $('#mensagem').summernote({
+//         height: 200,
+//     });
+//     $('#description').summernote({
+//         height: 200,
+//     });
+// });

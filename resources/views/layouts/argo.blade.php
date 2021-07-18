@@ -88,5 +88,14 @@ $rota = explode('.', $route);
         
         {{-- Inserindo script para Gráficos  --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+        
+        <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.ckeditor').ckeditor({
+                    height: 100,
+                });
+            });
+        </script>
     </body>
     </html>
