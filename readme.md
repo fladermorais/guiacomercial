@@ -75,15 +75,7 @@ rm /var/www/html/index.html
 
 Clonar o Projeto
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
-sudo git clone https://itacomercios@bitbucket.org/itacomercios/guia_comercial.git guia_comercial
-=======
 sudo git clone https://github.com/fladermorais/guiacomercial.git guia_comercial
->>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
-=======
-sudo git clone https://github.com/fladermorais/guiacomercial.git guia_comercial
->>>>>>> c74854e768dbe5705e64b3f65c4675748ad53f72
 ```
 
 Acessar a pasta do projeto
