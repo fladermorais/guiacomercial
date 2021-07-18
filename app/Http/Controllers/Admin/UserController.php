@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Empresa;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\User;
-use App\Role;
+use App\Models\Role;
 use Illuminate\Notifications\Notification;
 use App\Notifications\NewClient;
 use Illuminate\Support\Facades\DB;

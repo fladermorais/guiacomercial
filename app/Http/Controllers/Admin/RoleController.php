@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Role;
-use App\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller

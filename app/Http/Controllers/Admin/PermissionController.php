@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Permission;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 
 class PermissionController extends Controller

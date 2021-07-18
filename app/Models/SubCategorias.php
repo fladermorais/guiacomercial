@@ -1,18 +1,32 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Categoria extends Model
+class SubCategorias extends Model
 {
+
+    use Notifiable;
+
     protected $fillable = [
+        'categoria_id', 
         'nome', 
         'alias', 
         'descricao', 
-        'img',
+        'img', 
+        'status'
     ];
-    
+    protected $table = 'sub_categorias';
+
+    public function categorias()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+
+
     public function geraAlias( $str ) 
     {
         $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
@@ -20,4 +34,10 @@ class Categoria extends Model
         $palavra1 = strtolower($palavra1);
         return $palavra1;
     }
+
+    public function routeNotificationForSlack($notification)
+    {
+        return config('app.slack');
+    }
+
 }

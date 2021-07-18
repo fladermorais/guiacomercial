@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 // use App\Model\Permission;
-use App\Permission;
-use App\User;
+use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 

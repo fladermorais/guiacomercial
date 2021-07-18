@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Categoria;
-use App\Empresa;
-use App\Model\Canhoto;
-use App\Model\Role;
-use App\Site;
-use App\SubCategorias;
+use App\Models\Categoria;
+use App\Models\Empresa;
+use App\Models\Site;
+use App\Models\SubCategorias;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +45,6 @@ class HomeController extends Controller
     public function index()
     {   
         $dados = Site::find(1);
-
         // $anuncios = Empresa::all()->random()->limit(6)->get();
         $anuncios = Empresa::orderBy(DB::raw('RAND()'))->limit(6)->get();
         return view('Site.welcome', compact('dados', 'anuncios'));

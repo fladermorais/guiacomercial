@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Categoria;
-use App\Empresa;
+use App\Models\Categoria;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SubCategorias;
+use App\Models\SubCategorias;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Notifications\Notification;
