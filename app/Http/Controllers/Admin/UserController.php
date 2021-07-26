@@ -38,7 +38,7 @@ class UserController extends Controller
         ];
         return view('Admin.user.index', compact('users', 'resultado'));
     }
-
+    
     public function create()
     {
         if(Gate::denies('usuarios.create')){
@@ -53,26 +53,16 @@ class UserController extends Controller
             abort(403, "Não Autorizado");
         }
         $data = $request->all();
-        $validator = Validator::make($data, 
-        [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
-            ]   
-        );
+        $user = new User;
+        $validator = Validator::make($data, $user->rules());
         
         if($validator->fails()){
             return redirect()->route('usuarios.create')
             ->withErrors($validator)
             ->withInput();
         }
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-            ]
-        );
-
+        $response = $user->newInfo($data);
+        
         \Notification::send($user, new NewClient("Novo Usuário Cadastrado no sistema!"));
         
         flash('Usuário Criado com sucesso')->success();
@@ -86,7 +76,8 @@ class UserController extends Controller
         }
         $user = User::find($id);
         if(isset($user)){
-            if(auth()->user()->id == $id || auth()->user()->role_id == 1){
+            
+            if(auth()->user()->id == $id || auth()->user()->existRole('Administrador')){
                 return view('Admin.user.edit', compact('user'));
             } else {
                 flash('Ação não permitida')->important();
@@ -101,58 +92,32 @@ class UserController extends Controller
             abort(403, "Não Autorizado");
         }
         $data = $request->all();
-        $user = User::find($id);
-        if(isset($data['password'])){        
-            $validator = Validator::make($data, [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-                ]   
-            );
-            
-            if($validator->fails()){
-                return redirect()->route('usuarios.edit', $id)
-                ->withErrors($validator)
-                ->withInput();
-            }
-            
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            $user->password = Hash::make($data['password']);
-            $user->update();
-            
-            flash("Usuário Atualizado com sucesso!")->success();
-            if(auth()->user()->existRole('Administrador')){
-                return redirect()->route('usuarios.index');
-            } else {
-                return redirect()->route('logado');
-            }
-            // return redirect()->route('usuarios.index');
-            
-        } else {
-            $validator = Validator::make($data, [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-                ]   
-            );
-            
-            if($validator->fails()){
-                return redirect()->route('usuarios.edit', $id)
-                ->withErrors($validator)
-                ->withInput();
-            }
-            
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            $user->update();
-            flash("Usuário Atualizado com sucesso!")->success();
-            if(auth()->user()->existRole('Administrador')){
-                return redirect()->route('usuarios.index');
-            } else {
-                return redirect()->route('logado');
-            }
-            // return redirect()->route('usuarios.index');
+        $user = User::find($id);     
+        $validator = Validator::make($data, $user->rulesUpdate());
+        
+        if($validator->fails()){
+            return redirect()->route('usuarios.edit', $id)
+            ->withErrors($validator)
+            ->withInput();
         }
+        $response = $user->updateInfo($data);
+        
+        flash("Usuário Atualizado com sucesso!")->success();
+        if(auth()->user()->existRole('Administrador')){
+            return redirect()->route('usuarios.index');
+        } else {
+            return redirect()->route('logado');
+        }
+        // return redirect()->route('usuarios.index');
+        
+        
+        flash("Usuário Atualizado com sucesso!")->success();
+        if(auth()->user()->existRole('Administrador')){
+            return redirect()->route('usuarios.index');
+        } else {
+            return redirect()->route('logado');
+        }
+        
     }
     
     public function delete($id)
@@ -200,9 +165,7 @@ class UserController extends Controller
             flash("Usuário não encontrado no sistema")->error();
             return redirect()->route("usuarios.index");
         }
-    }
-    
-    
+    }    
     
     // Rotas referente a Roles
     public function role($user){

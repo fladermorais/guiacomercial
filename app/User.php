@@ -6,6 +6,8 @@ use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class User extends Authenticatable
 {
@@ -90,5 +92,41 @@ class User extends Authenticatable
     public function routeNotificationForSlack($notification)
     {
         return config('app.slack');
+    }
+    
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ];
+    }
+    
+    public function rulesUpdate()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->id)]
+        ];
+    }
+    
+    public function newInfo($data)
+    {
+        $data['password'] = Hash::make($data['password']);
+        $info = $this->create($data);
+        return $info;
+    }
+    
+    public function updateInfo($data)
+    {
+        if(isset($data['password'])){
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
+
+        $info = $this->update($data);
+        return $info;
     }
 }
