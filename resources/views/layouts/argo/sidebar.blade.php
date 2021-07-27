@@ -1,9 +1,13 @@
+@php
+use App\Models\Site;
+$site = Site::first();
+@endphp
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
   <div class="scrollbar-inner">
     <!-- Brand -->
     <div class="sidenav-header  align-items-center">
       <a class="navbar-brand" href="{{ route('home') }}">
-        <img src="{{asset('/storage/logo/logo.png')}}" class="navbar-brand-img" alt="...">
+        <img src="{{ asset('/storage/logo/' . $site->logo)}}" class="navbar-brand-img" alt="...">
         
       </a>
     </div>
