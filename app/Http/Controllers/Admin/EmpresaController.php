@@ -73,15 +73,8 @@ class EmpresaController extends Controller
             abort(403, "Não Autorizado");
         }
         $data = $request->all();
-        
-        $validator = Validator::make($data, [
-            'nome'      =>  ['required'],
-            'descricao' =>  ['required'],
-            'logo'      =>  ['required'],
-            'imagem'    =>  ['required'],
-            'telefone'  =>  ['required']
-            ]
-        );
+        $empresa = new Empresa;
+        $validator = Validator::make($data, $empresa->rules());
         
         if($validator->fails()){
             flash('Preencha os Campos Obrigatórios')->warning();
@@ -94,74 +87,9 @@ class EmpresaController extends Controller
             flash('Só é permitido o cadastro de uma empresa por conta')->warning();
             return redirect()->route('empresas.index');
         }
-        $empresa = new Empresa();    
-        $empresa->user_id = auth()->user()->id;
-        $empresa->categoria_id = $data['categoria'];
-        (isset($data['subcategoria']) ? $empresa->subcategoria_id = $data['subcategoria'] : "");
-        $empresa->nome = $data['nome'];
-        $empresa->alias = $empresa->geraAlias($data['nome']);
-        (isset($data['email'])? $empresa->email = $data['email'] : "" );
-        (isset($data['telefone']) ? $empresa->telefone = $data['telefone'] : "" );
-        (isset($data['whatsapp']) ? $empresa->whatsapp = $data['whatsapp'] : "" );
-        (isset($data['descricao']) ? $empresa->descricao = $data['descricao'] : "" );
-        (isset($data['endereco']) ? $empresa->endereco = $data['endereco'] : "" );
-        (isset($data['bairro']) ? $empresa->bairro = $data['bairro'] : "" );
-        (isset($data['cidade']) ? $empresa->cidade = $data['cidade'] : "" );
-        (isset($data['estado']) ? $empresa->estado = $data['estado'] : "" );
-        (isset($data['horario']) ? $empresa->horario_atendimento = $data['horario'] : "" );
-        (isset($data['site']) ? $empresa->site = $data['site'] : "" );
-        (isset($data['facebook']) ? $empresa->facebook = $data['facebook'] : "" );
-        (isset($data['instagran']) ? $empresa->instagran = $data['instagran'] : "" );
         
-        (isset($data['segunda']) ? $empresa->segunda = $data['segunda'] : "" );
-        (isset($data['segunda_final']) ? $empresa->segunda_final = $data['segunda_final'] : "" );
-        (isset($data['terca']) ? $empresa->terca = $data['terca'] : "" );
-        (isset($data['terca_final']) ? $empresa->terca_final = $data['terca_final'] : "" );
-        (isset($data['quarta']) ? $empresa->quarta = $data['quarta'] : "" );
-        (isset($data['quarta_final']) ? $empresa->quarta_final = $data['quarta_final'] : "" );
-        (isset($data['quinta']) ? $empresa->quinta = $data['quinta'] : "" );
-        (isset($data['quinta_final']) ? $empresa->quinta_final = $data['quinta_final'] : "" );
-        (isset($data['sexta']) ? $empresa->sexta = $data['sexta'] : "" );
-        (isset($data['sexta_final']) ? $empresa->sexta_final = $data['sexta_final'] : "" );
-        (isset($data['sabado']) ? $empresa->sabado = $data['sabado'] : "" );
-        (isset($data['sabado_final']) ? $empresa->sabado_final = $data['sabado_final'] : "" );
-        (isset($data['domingo']) ? $empresa->domingo = $data['domingo'] : "" );
-        (isset($data['domingo_final']) ? $empresa->domingo_final = $data['domingo_final'] : "" );
-        (isset($data['feriado']) ? $empresa->feriado = $data['feriado'] : "" );
-        (isset($data['feriado_final']) ? $empresa->feriado_final = $data['feriado_final'] : "" );
-        
-        $empresa->view = 0;
-        $empresa->like = 0;
-        
-        if(isset($data['logo'])){
-            $file = $data['logo'];
-            $extensao = $data['logo']->getClientOriginalExtension();
-            $nome = $empresa->alias.".".$extensao;
-            $path = public_path('/storage/logo');
-            
-            $file->move($path, $nome);
-            if(!$file){
-                return redirect()->back()->with('error', 'Falha ao fazer o upload')->withInput();
-            }
-            $empresa->img = $nome;
-        } 
-        
-        if(isset($data['imagem'])){
-            $file2 = $data['imagem'];
-            $extensao2 = $data['imagem']->getClientOriginalExtension();
-            $nome2 = $empresa->alias.".".$extensao2;
-            $path2 = public_path('/storage/imagem');
-            
-            $file2->move($path2, $nome2);
-            if(!$file){
-                return redirect()->back()->with('error', 'Falha ao fazer o upload')->withInput();
-            }
-            $empresa->foto = $nome2;
-        } 
-        
-        $empresa->save();
-        if($empresa->id){
-            
+        $response = $empresa->newInfo($data);
+        if($response){
             \Notification::send($empresa, new NewAnnouncement("Novo Anúncio Inserido no sistema!"));
             
             flash('Empresa Cadastrada com sucesso!')->success();
@@ -212,85 +140,10 @@ class EmpresaController extends Controller
             }    
         }
         
-        
         $data = $request->all();
-        // dd($data);
-        $empresa->categoria_id = $data['categoria'];
-        (isset($data['subcategoria']) ? $empresa->subcategoria_id = $data['subcategoria'] : "");
-        $empresa->nome = $data['nome'];
-        $empresa->alias = $empresa->geraAlias($data['nome']);
-        $empresa->email = $data['email'];
-        (isset($data['telefone']) ? $empresa->telefone = $data['telefone'] : $empresa->telefone = "" );
-        (isset($data['whatsapp']) ? $empresa->whatsapp = $data['whatsapp'] : $empresa->whatsapp = "" );
-        (isset($data['descricao']) ? $empresa->descricao = $data['descricao'] : $empresa->descricao = "" );
-        (isset($data['endereco']) ? $empresa->endereco = $data['endereco'] : $empresa->endereco = "" );
-        (isset($data['bairro']) ? $empresa->bairro = $data['bairro'] : $empresa->bairro = "" );
-        (isset($data['cidade']) ? $empresa->cidade = $data['cidade'] : $empresa->cidade = "" );
-        (isset($data['estado']) ? $empresa->estado = $data['estado'] : $empresa->estado = "" );
-        (isset($data['horario']) ? $empresa->horario_atendimento = $data['horario'] : $empresa->horario_atendimento = "" );
-        (isset($data['site']) ? $empresa->site = $data['site'] : $empresa->site = "" );
-        (isset($data['facebook']) ? $empresa->facebook = $data['facebook'] : $empresa->facebook = "" );
-        (isset($data['instagran']) ? $empresa->instagran = $data['instagran'] : $empresa->instagran = "" );
         
-        (isset($data['segunda']) ? $empresa->segunda = $data['segunda'] : $empresa->segunda = "" );
-        (isset($data['segunda_final']) ? $empresa->segunda_final = $data['segunda_final'] : $empresa->segunda_final = "" );
-        (isset($data['terca']) ? $empresa->terca = $data['terca'] : $empresa->terca = "" );
-        (isset($data['terca_final']) ? $empresa->terca_final = $data['terca_final'] : "" );
-        (isset($data['quarta']) ? $empresa->quarta = $data['quarta'] : $empresa->quarta = "" );
-        (isset($data['quarta_final']) ? $empresa->quarta_final = $data['quarta_final'] : $empresa->quarta_final = "" );
-        (isset($data['quinta']) ? $empresa->quinta = $data['quinta'] : $empresa->quinta = "" );
-        (isset($data['quinta_final']) ? $empresa->quinta_final = $data['quinta_final'] : $empresa->quinta_final = "" );
-        (isset($data['sexta']) ? $empresa->sexta = $data['sexta'] : $empresa->sexta = "" );
-        (isset($data['sexta_final']) ? $empresa->sexta_final = $data['sexta_final'] : $empresa->sexta_final = "" );
-        (isset($data['sabado']) ? $empresa->sabado = $data['sabado'] : $empresa->sabado = "" );
-        (isset($data['sabado_final']) ? $empresa->sabado_final = $data['sabado_final'] : $empresa->sabado_final = "" );
-        (isset($data['domingo']) ? $empresa->domingo = $data['domingo'] : $empresa->domingo = "" );
-        (isset($data['domingo_final']) ? $empresa->domingo_final = $data['domingo_final'] : $empresa->domingo_final = "" );
-        (isset($data['feriado']) ? $empresa->feriado = $data['feriado'] : $empresa->feriado = "" );
-        (isset($data['feriado_final']) ? $empresa->feriado_final = $data['feriado_final'] : $empresa->feriado_final = "" );
-        
-        if(isset($data['logo'])){
-            if(isset($empresa->img)){
-                $caminho = public_path('/storage/logo/');
-                $arquivo = $caminho.$empresa->img;
-                if(file_exists($arquivo)){
-                    unlink($arquivo);
-                }
-            }
-            $file = $data['logo'];
-            $extensao = $data['logo']->getClientOriginalExtension();
-            $nome = $empresa->alias.".".$extensao;
-            $path = public_path('/storage/logo');
-            
-            $file->move($path, $nome);
-            if(!$file){
-                return redirect()->back()->with('error', 'Falha ao fazer o upload')->withInput();
-            }
-            $empresa->img = $nome;
-        } 
-        
-        if(isset($data['imagem'])){
-            if(isset($empresa->imagem)){
-                $caminho = public_path('/storage/imagem/');
-                $arquivo = $caminho.$empresa->foto;
-                if(file_exists($arquivo)){
-                    unlink($arquivo);
-                }
-            }
-            $file2 = $data['imagem'];
-            $extensao2 = $data['imagem']->getClientOriginalExtension();
-            $nome2 = $empresa->alias.".".$extensao2;
-            $path2 = public_path('/storage/imagem');
-            
-            $file2->move($path2, $nome2);
-            if(!$file2){
-                return redirect()->back()->with('error', 'Falha ao fazer o upload')->withInput();
-            }
-            $empresa->foto = $nome2;
-        } 
-        
-        $empresa->update();
-        if($empresa->getChanges()){
+        $response = $empresa->updateInfo($data);
+        if($response){
             flash('Anúncio atualizado com sucesso!')->success();
             return redirect()->route('empresas.index');
         } else {
@@ -315,25 +168,8 @@ class EmpresaController extends Controller
             return redirect()->back();
         }
         
-        // Apagando a Logo
-        if(isset($empresa->img)){
-            $caminho = public_path('/storage/'.auth()->user()->id.'/logo/');
-            $arquivo = $caminho.$empresa->img;
-            if(file_exists($arquivo)){
-                unlink($arquivo);
-            }
-        }
+        $response = $empresa->deleteInfo();
         
-        // Apagando a Imagem
-        if(isset($empresa->foto)){
-            $caminho = public_path('/storage/'. auth()->user()->id .'/imagem/');
-            $arquivo = $caminho.$empresa->foto;
-            if(file_exists($arquivo)){
-                unlink($arquivo);
-            }
-        }
-        
-        $empresa->delete();
         flash('Anúncio excluído com sucesso!')->success();
         return redirect()->route('empresas.index');
     }
