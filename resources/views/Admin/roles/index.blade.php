@@ -7,7 +7,7 @@
             <h3 class="float-left">Cargos</h3>
         </div>
         
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-flush">
                 <thead class="thead-light">
                     <tr>

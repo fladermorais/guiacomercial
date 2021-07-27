@@ -6,7 +6,8 @@
             <h3 class="float-left">Lista de Categorias</h3>
             <a class="btn btn-default float-right" href="{{route('categorias.create')}}">Nova Categoria</a>
         </div>
-        <div class="card-body">
+        
+        <div class="card-body table-responsive">
             <table class="table table-flush">
                 <thead class="thead-light">
                     <tr>
