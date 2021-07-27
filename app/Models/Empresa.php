@@ -120,6 +120,7 @@ class Empresa extends Model
         
         $data['user_id'] = auth()->user()->id;
         $data['categoria_id'] = $data['categoria'];
+        (isset($data['subcategoria']) ? $data['subcategoria_id'] = $data['subcategoria'] : "");
         $data['alias']          =   $trait->getAlias($data['nome']);
         $data['view'] = 0;
         $data['like'] = 0;
