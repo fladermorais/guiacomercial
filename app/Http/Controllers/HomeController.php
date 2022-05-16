@@ -99,17 +99,17 @@ class HomeController extends Controller
     public function categorias()
     {
         $dados = Site::find(1);
-        $categorias = Categoria::join('empresas', 'empresas.categoria_id', 'categorias.id')->select([
-            DB::raw('count(*) as total'),
-            'categorias.id as categoria',
-            'categorias.img as img',
-            'categorias.alias as alias',
-            'categorias.nome as nome',
-            'categorias.descricao as descricao'
-            ] )
-            ->orderBy('categorias.nome', 'asc')
-            ->groupBy('categoria', 'img', 'alias', 'nome', 'descricao')
-            ->get();
+        // $categorias = Categoria::join('empresas', 'empresas.categoria_id', 'categorias.id')->select([
+        //     DB::raw('count(*) as total'),
+        //     'categorias.id as categoria',
+        //     'categorias.img as img',
+        //     'categorias.alias as alias',
+        //     'categorias.nome as nome',
+        //     'categorias.descricao as descricao'
+        //     ] )
+        //     ->orderBy('categorias.nome', 'asc')
+        //     ->groupBy('categoria', 'img', 'alias', 'nome', 'descricao')
+        //     ->get();
         
         // dd($categorias);
         $breadcrumbs = [
@@ -119,7 +119,10 @@ class HomeController extends Controller
             ];
         // dd($breadcrumbs);
         // $categorias = Categoria::orderBy('nome', 'asc')->get();
-        return view('Site.categorias', compact('categorias', 'dados', 'breadcrumbs'));
+        
+        $anuncios = Empresa::inRandomOrder()->paginate(3);
+
+        return view('Site.categorias', compact('dados', 'breadcrumbs', 'anuncios'));
         
     }
 

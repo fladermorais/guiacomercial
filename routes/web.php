@@ -5,7 +5,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/categoria/{alias}', 'HomeController@categoria')->name('categoria');
 Route::get('/subcategoria/{alias}', 'HomeController@subcategoria')->name('subcategoria');
-Route::get('/categorias', 'HomeController@categorias')->name('categorias');
+Route::get('/empresas', 'HomeController@categorias')->name('categorias');
 Route::get('/anuncio/{alias}', 'HomeController@anuncio')->name('anuncio');
 Route::get('/like/{id}', 'HomeController@like')->name('like');
 Route::get('/sobre', 'HomeController@sobre')->name('sobre');

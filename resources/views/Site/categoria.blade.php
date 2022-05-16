@@ -36,37 +36,38 @@
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 portfolio-item">
                 <div class="portfolio-one">
                     <div class="portfolio-head">
-                    <div class="portfolio-img"><img alt="{{ $anuncio->nome }}" src="{{ asset('storage/logo/'.$anuncio->img)}}"></div>
+                        <div class="portfolio-img"><img alt="{{ $anuncio->nome }}" src="{{ asset('storage/logo/'.$anuncio->img)}}"></div>
                     </div>
                     <div class="portfolio-content">
                         <h5 class="title">{{ $anuncio->nome }}</h5>
                         {{-- <p class="descricao">{{ Str::limit($anuncio->descricao,40) }}</p> --}}
                         <p class="telefone"><b>Telefone: </b><a href="tel:{{ $anuncio->telefone }}">{{ $anuncio->telefone }}</a></p>
                         <p class="categoria">
-                            <b>Categoria: </b><a href="{{ route('categoria', $anuncio->categorias->alias) }}"> {{ $anuncio->categorias->nome }} </a>
+                            <b>Categoria: </b>
+                            <a href="{{ route('categoria', $anuncio->categorias->alias) }}"> {{ $anuncio->categorias->nome }} </a>
                             @if($anuncio->subcategoria_id)
                             - 
                             <a href="{{ route('subcategoria', $anuncio->subcategorias->alias)}}">{{ $anuncio->subcategorias->nome }}</a>
                             @endif
-                            
-                            <div class="flex-row detalhes">
-                                <a class="btn btn-default btn-sm" href="{{ route('anuncio', $anuncio->alias )}}">Visualizar</a>
-                                @if($anuncio->like > 0)
-                                <p class="curtir-home">
-                                    <i class="fa fa-heart"></i> 
-                                    <span>{{ strlen($anuncio->like) == 1 ? "0".$anuncio->like : $anuncio->like }}</span>
-                                </p>
-                                @endif
-                            </div>
+                        </p>
+                        <div class="flex-row detalhes">
+                            <a class="btn btn-default btn-sm" href="{{ route('anuncio', $anuncio->alias )}}">Visualizar</a>
+                            @if($anuncio->like > 0)
+                            <p class="curtir-home">
+                                <i class="fa fa-heart"></i> 
+                                <span>{{ strlen($anuncio->like) == 1 ? "0".$anuncio->like : $anuncio->like }}</span>
+                            </p>
+                            @endif
                         </div>
                     </div>
                 </div>
-                @endforeach
             </div>
+            @endforeach
         </div>
-    </section> 
-    @endif
-    
-    @include('Site._pesquisa')
-    
-    @endsection
+    </div>
+</section> 
+@endif
+
+@include('Site._pesquisa')
+
+@endsection
