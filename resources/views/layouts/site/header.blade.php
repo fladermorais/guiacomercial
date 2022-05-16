@@ -16,7 +16,7 @@
                 <div id="navbar" class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class=""><a href="{{ route('home')}}">Home</a></li>
-                        <li class=""><a href="{{ route('categorias')}}">Categorias</a></li>
+                        <li class=""><a href="{{ route('categorias')}}">Empresas</a></li>
                         <li class=""><a href="{{ route('logado')}}">Área do Anunciante</a></li>
                     </ul>
                 </div>
