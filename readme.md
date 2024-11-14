@@ -134,7 +134,7 @@ sudo chmod -R 777 storage
 
 ### Usuário padrão do sistema
 ```
-usuário:    contato@fladermorais.com.br
+usuário:    admin@admin.com.br
 senha:      Mudar123@
 ```
 
