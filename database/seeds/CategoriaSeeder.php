@@ -1,6 +1,6 @@
 <?php
 
-use App\Categoria;
+use App\Models\Categoria;
 use Illuminate\Database\Seeder;
 
 class CategoriaSeeder extends Seeder
@@ -16,7 +16,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Animais",
             "alias"   =>  "animais",
             "descricao"   =>  "Produtos e serviçoes relacionados a animais",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
 
@@ -24,7 +24,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Alimentação",
             "alias"   =>  "alimentacao",
             "descricao"   =>  "Produtos e serviçoes relacionados a alimentação",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
 
@@ -32,7 +32,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Educação",
             "alias"   =>  "educacao",
             "descricao"   =>  "Produtos e serviçoes relacionados a educação",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
 
@@ -40,7 +40,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Estética",
             "alias"   =>  "estetica",
             "descricao"   =>  "Produtos e serviçoes relacionados a estética",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
 
@@ -48,7 +48,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Saúde",
             "alias"   =>  "saude",
             "descricao"   =>  "Produtos e serviçoes relacionados a saúde",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
 
@@ -56,7 +56,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Serviços",
             "alias"   =>  "servicos",
             "descricao"   =>  "Serviços em geral",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
 
@@ -64,7 +64,7 @@ class CategoriaSeeder extends Seeder
             "nome"  =>  "Vestuário",
             "alias"   =>  "vestuario",
             "descricao"   =>  "Produtos e serviçoes relacionados a vestuário",
-            "ativo"   =>  "sim",
+            "status"   =>  "sim",
             ]
         );
     }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Site;
+use App\Models\Site;
 use Illuminate\Database\Seeder;
 
 class SiteTableSeeder extends Seeder
