@@ -18,7 +18,7 @@ class RolesTableSeeder extends Seeder
         ]);
 
         Role::firstOrCreate([
-            "name"  =>  "Profissional",
+            "name"  =>  "Cliente",
             "description"   =>  "Acesso Personalizado ao sistema!",
         ]);
     }
