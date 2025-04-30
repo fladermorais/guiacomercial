@@ -147,11 +147,16 @@
         </div>
         
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-align">
+
             <div class="section-heading">
                 <div class="like">
-                    <h4 class="flex-row"> <i class="fa fa-thumbs-up"></i>   Curtidas </h4>
-                    {{-- <i class="fa fa-heart"></i> --}}
-                    <p>{{ $anuncio->like }}</p>
+                    <h4 class="flex-row"> <i class="fa fa-eye"></i>Visualizações <span>{{ $anuncio->view }}</span></h4>
+                </div>
+            </div>
+
+            <div class="section-heading">
+                <div class="like">
+                    <h4 class="flex-row"> <i class="fa fa-thumbs-up"></i>Curtidas <span>{{ $anuncio->like }}</span></h4>
                 </div>
             </div>
             

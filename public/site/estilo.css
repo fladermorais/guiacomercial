@@ -93,19 +93,27 @@
     font-weight: 500 !important;
 }
 
+.detalhes .visualizar {
+    margin-top: 10px;
+    width: 100%;
+}
+
 .curtir-home {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 45px;
+    right: 0px;
     /* border: 2px solid blue; */
     font-size: 3em;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
 .curtir-home span {
-    position: absolute;
+    position: relative;
     bottom: 10px;
-    right: 10px;
-    font-size: .45em;
+    right: 40px;
+    font-size: .35em;
     color: #fff !important;
 }
 
