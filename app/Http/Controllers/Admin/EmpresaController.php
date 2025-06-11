@@ -90,7 +90,7 @@ class EmpresaController extends Controller
         
         $response = $empresa->newInfo($data);
         if($response){
-            \Notification::send($empresa, new NewAnnouncement("Novo Anúncio Inserido no sistema!"));
+            // \Notification::send($empresa, new NewAnnouncement("Novo Anúncio Inserido no sistema!"));
             
             flash('Empresa Cadastrada com sucesso!')->success();
             return redirect()->route('empresas.index');
