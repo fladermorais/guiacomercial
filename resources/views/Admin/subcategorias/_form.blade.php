@@ -1,5 +1,5 @@
 <div class="form-group">
-  <div class="form-row">
+  <div class="row">
     <div class="col-md-8">
       <label for="nome">Nome * </label><br>
       <input required class='form-control' type="text" id="nome" name="nome" value="{{ (isset($categoria->nome) ? $categoria->nome : old('nome'))}}">
@@ -27,7 +27,7 @@
     
     
   </div>
-  <div class="form-row">
+  <div class="row">
     
     <div class="col-md-12">
       <label for="descricao">Descrição</label>
