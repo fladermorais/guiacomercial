@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CargoStoreRequest;
+use App\Http\Requests\CargoUpdateRequest;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
@@ -27,7 +29,7 @@ class RoleController extends Controller
         return view('Admin.roles.create');
     }
 
-    public function store(Request $request)
+    public function store(CargoStoreRequest $request)
     {
         if(Gate::denies('roles.create')){
             abort(403, "Não Autorizado");
@@ -52,7 +54,7 @@ class RoleController extends Controller
         return view('Admin.roles.edit', compact('role'));
     }
 
-    public function update (Request $request, $id)
+    public function update (CargoUpdateRequest $request, $id)
     {
         if(Gate::denies('roles.edit')){
             abort(403, "Não Autorizado");
