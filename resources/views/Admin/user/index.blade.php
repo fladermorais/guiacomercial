@@ -1,7 +1,7 @@
 @extends('layouts.argo')
 @section('content')
 <div class="col">    
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header flex-row">
             <h3 class="float-left">Lista de Usuários</h3>
             
@@ -9,15 +9,9 @@
                 @csrf
                 <div class="form-group mb-0">
                     <div class="input-group input-group-alternative input-group-merge">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        </div>
                         <input class="form-control" placeholder="Pesquisar" type="text" name="search">
                     </div>
                 </div>
-                <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
             </form>
             
             <a class="btn btn-default float-right" href="{{route('usuarios.create')}}">Novo Usuário</a>
@@ -30,7 +24,8 @@
             <a class="btn btn-success" href="{{ route('usuarios.index') }}">Visualizar todos</a>
         </div>
         @endif
-        
+    </div>
+    <div class="card mb-4">
         <div class="card-body table-responsive">
             <table class="table table-flush">
                 <thead class="thead-light">
