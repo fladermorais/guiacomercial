@@ -52,17 +52,6 @@ class Empresa extends Model
         'feriado_final',
     ];
     
-    public function rules()
-    {
-        return [
-            'nome'      =>  ['required'],
-            'descricao' =>  ['required'],
-            'logo'      =>  ['required'],
-            'imagem'    =>  ['required'],
-            'telefone'  =>  ['required']
-        ];
-    }
-    
     public function geraAlias( $str ) 
     {
         $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");

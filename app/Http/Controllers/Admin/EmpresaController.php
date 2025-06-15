@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmpresaRequest;
 use App\Models\SubCategorias;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -67,30 +68,23 @@ class EmpresaController extends Controller
         return view('Admin.empresas.create', compact('categorias', 'subcategorias'));
     }
     
-    public function store(Request $request)
+    public function store(EmpresaRequest $request)
     {
         if(Gate::denies('empresas.create')){
             abort(403, "Não Autorizado");
         }
         $data = $request->all();
         $empresa = new Empresa;
-        $validator = Validator::make($data, $empresa->rules());
-        
-        if($validator->fails()){
-            flash('Preencha os Campos Obrigatórios')->warning();
-            return redirect()->back()
-            ->withErrors($validator)
-            ->withInput();
-        }
+       
         $verifica = Empresa::where('user_id', '=', auth()->user()->id)->get();
         if(count($verifica) >= auth()->user()->quantidade) {
-            flash('Só é permitido o cadastro de uma empresa por conta')->warning();
+            flash('Você não tem permissão para criar um nova empresa!')->warning();
             return redirect()->route('empresas.index');
         }
         
         $response = $empresa->newInfo($data);
         if($response){
-            // \Notification::send($empresa, new NewAnnouncement("Novo Anúncio Inserido no sistema!"));
+            \Notification::send($empresa, new NewAnnouncement("Novo Anúncio Inserido no sistema!"));
             
             flash('Empresa Cadastrada com sucesso!')->success();
             return redirect()->route('empresas.index');
@@ -123,7 +117,7 @@ class EmpresaController extends Controller
         return view('Admin.empresas.edit', compact('empresa', 'categorias', 'subcategorias'));
     }
     
-    public function update(Request $request, $id)
+    public function update(EmpresaRequest $request, $id)
     {
         if(Gate::denies('empresas.edit')){
             abort(403, "Não Autorizado");
