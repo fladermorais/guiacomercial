@@ -1,12 +1,13 @@
 @extends('layouts.argo')
 @section('content')
 <div class="col">    
-    <div class="card">
-        <div class="card-header">
-            <a class="btn btn-default float-right" href="{{route('roles.create')}}">Novo Cargo</a>
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between">
             <h3 class="float-left">Cargos</h3>
+            <a class="btn btn-default" href="{{route('roles.create')}}">Novo Cargo</a>
         </div>
-        
+    </div>
+    <div class="card mb-4">
         <div class="card-body table-responsive">
             <table class="table table-flush">
                 <thead class="thead-light">
