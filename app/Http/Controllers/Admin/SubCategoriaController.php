@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubCategoriaStoreRequest;
 use App\Models\SubCategorias;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Notifications\Notification;
 use App\Notifications\NewAnnouncement;
 
@@ -44,7 +44,7 @@ class SubCategoriaController extends Controller
         return view('Admin.subcategorias.create', compact('categorias'));
     }
     
-    public function store(Request $request)
+    public function store(SubCategoriaStoreRequest $request)
     {
         if(Gate::denies('subCategorias.store')){
             abort(403, "Não Autorizado");
@@ -52,13 +52,6 @@ class SubCategoriaController extends Controller
         $data = $request->all();
         
         $categoria = new SubCategorias();
-        $validator = Validator::make($data, $categoria->rules());
-        if($validator->fails()){
-            flash('Preencha os campos obrigatórios')->warning();
-            return redirect()->back()
-            ->withErrors($validator)
-            ->withInput();
-        }
         
         $categoriaPrincipal = Categoria::find($data['categoria_id']);
         if(!isset($categoriaPrincipal)){
@@ -87,7 +80,7 @@ class SubCategoriaController extends Controller
         return view('Admin.subcategorias.edit', compact('categoria', 'categorias'));
     }
     
-    public function update(Request $request, $id)
+    public function update(SubCategoriaStoreRequest $request, $id)
     {
         if(Gate::denies('subCategorias.edit')){
             abort(403, "Não Autorizado");
@@ -98,13 +91,6 @@ class SubCategoriaController extends Controller
             return redirect()->route('subCategorias.index');
         }
         $data = $request->all();
-        
-        $validator = Validator::make($data, $categoria->rules());
-        if($validator->fails()){
-            return redirect()->route('subCategorias.index')
-            ->withErrors($validator)
-            ->withInput();
-        }
         
         $categoriaPrincipal = Categoria::find($data['categoria_id']);
         if(!isset($categoriaPrincipal)){
