@@ -1,7 +1,7 @@
 @extends('layouts.argo')
 @section('content')
 <div class="col">    
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header flex-row">
             <h3 class="float-left">Lista de Empresas</h3>
             @if(count($empresa) > 1 || auth()->user()->quantidade > 1)
@@ -9,15 +9,9 @@
                 @csrf
                 <div class="form-group mb-0">
                     <div class="input-group input-group-alternative input-group-merge">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        </div>
                         <input class="form-control" placeholder="Pesquisar" type="text" name="search">
                     </div>
                 </div>
-                <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
             </form>
             @endif
             @if($criar == 1)
@@ -32,7 +26,9 @@
             <a class="btn btn-success" href="{{ route('empresas.index') }}">Visualizar todos</a>
         </div>
         @endif
-        
+    </div>
+    
+    <div class="card mb-4">
         <div class="card-body table-responsive">
             <table class="table table-flush">
                 <thead class="thead-light">
@@ -66,7 +62,6 @@
                             @can('empresas.alterClient')
                             <a class="btn btn-default btn-sm" href="{{route('empresas.alterClient', $emp->id)}}" title="Alterar Cliente"><i class="fas fa-edit"></i></a>
                             @endcan
-                            
                         </td>
                     </tr>
                     @endforeach
@@ -74,6 +69,10 @@
             </table>
         </div>
     </div>
-    {{ $empresa->links() }}
+    <div class="card mb-4">
+        <div>
+            {{ $empresa->links() }}
+        </div>
+    </div>
 </div>
 @endsection

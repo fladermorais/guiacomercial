@@ -1,5 +1,5 @@
 <div class="form-group">
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-6">
             <label for="nome">Nome * </label><br>
             <input required class='form-control' type="text" id="nome" name="nome" value="{{ (isset($empresa->nome) ? $empresa->nome : old('nome') )}}">
@@ -32,7 +32,7 @@
         
     </div>
     
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-12">
             <label for="descricao">Descrição * </label>
             <textarea class='form-control' id="description" name="descricao" cols="30" rows="5">{{ (isset($empresa->descricao) ? $empresa->descricao : old('descricao') )}}</textarea>
@@ -43,7 +43,7 @@
             @endif
         </div>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-6">
             <label for="logo">Logo/ Principal * </label>
             <input class='form-control' type="file" id="logo" name="logo" value="{{old('logo')}}">
@@ -70,10 +70,10 @@
     
     <hr>
     
-    <div class="form-row">
+    <div class="row">
         <h3>Informações de Contato</h3>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-4">
             <label for="telefone">Telefone * </label>
             <input required class='form-control' type="text" id="telefone" name="telefone" value="{{ (isset($empresa->telefone) ? $empresa->telefone : old('telefone') )}}">
@@ -105,7 +105,7 @@
         </div>
     </div>
     
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-4">
             <label for="endereco">Endereço/N</label>
             <input  class='form-control' type="text" id="endereco" name="endereco" value="{{ (isset($empresa->endereco) ? $empresa->endereco : old('endereco') )}}" placeholder="Ex.: Meu Bairro">
@@ -148,10 +148,10 @@
     
     <hr>
     
-    <div class="form-row">
+    <div class="row">
         <h3>Horário de Atendimento</h3>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-3 ">
             <div class="dia_semana">
                 <label for="segunda">Segunda Feira</label>
@@ -346,10 +346,10 @@
     </div>
     <hr>
     
-    <div class="form-row">
+    <div class="row">
         <h3>Informações On-Line</h3>
     </div>
-    <div class="form-row">
+    <div class="row">
         <div class="col-md-4">
             <label for="site">Site</label>
             <input  class='form-control' type="text" id="site" name="site" value="{{ (isset($empresa->site) ? $empresa->site : old('site') )}}" placeholder="www.meusite.com.br">
