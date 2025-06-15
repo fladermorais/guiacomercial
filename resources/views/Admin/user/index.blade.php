@@ -33,15 +33,17 @@
                         <th>Id</th>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Quantidade</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
                     <tr class="alert alert-{{isset($user->deleted_at) ? 'danger' : ''}}">
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->quantidade }}</td>
                         <td>
                             @if(isset($user->deleted_at))
                             <a class="btn btn-warning btn-sm" href="{{route('usuarios.active', $user->id)}}" title="Ativar"><i class="fas fa-plus"></i></a>

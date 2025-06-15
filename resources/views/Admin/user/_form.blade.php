@@ -1,6 +1,6 @@
 <div class="form-group">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <label for="name">Nome * </label><br>
             <input required class='form-control' type="text" id="name" name="name" value="{{ $user->name ?? old('name') }}">
             @if($errors->has('name'))
@@ -9,6 +9,18 @@
             @endforeach
             @endif
         </div>
+
+        @if(auth()->user()->isAdmin())
+        <div class="col-sm-4">
+            <label for="quantidade">Quantidade</label><br>
+            <input required class='form-control' type="text" id="quantidade" name="quantidade" value="{{ $user->quantidade ?? old('quantidade') }}">
+            @if($errors->has('quantidade'))
+            @foreach($errors->get('quantidade') as $e)
+            {{$e}}
+            @endforeach
+            @endif
+        </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-md-4">
