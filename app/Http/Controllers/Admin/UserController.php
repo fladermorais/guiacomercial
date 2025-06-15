@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use App\User;
 use App\Models\Role;
 use Illuminate\Notifications\Notification;
@@ -47,20 +46,14 @@ class UserController extends Controller
         return view('Admin.user.create');
     }
     
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         if(Gate::denies('usuarios.create')){
             abort(403, "Não Autorizado");
         }
         $data = $request->all();
         $user = new User;
-        $validator = Validator::make($data, $user->rules());
         
-        if($validator->fails()){
-            return redirect()->route('usuarios.create')
-            ->withErrors($validator)
-            ->withInput();
-        }
         $response = $user->newInfo($data);
         
         \Notification::send($user, new NewClient("Novo Usuário Cadastrado no sistema!"));
@@ -86,20 +79,14 @@ class UserController extends Controller
         }
     }
     
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         if(Gate::denies('usuarios.edit')){
             abort(403, "Não Autorizado");
         }
         $data = $request->all();
         $user = User::find($id);     
-        $validator = Validator::make($data, $user->rulesUpdate());
         
-        if($validator->fails()){
-            return redirect()->route('usuarios.edit', $id)
-            ->withErrors($validator)
-            ->withInput();
-        }
         $response = $user->updateInfo($data);
         
         flash("Usuário Atualizado com sucesso!")->success();
@@ -108,7 +95,6 @@ class UserController extends Controller
         } else {
             return redirect()->route('logado');
         }
-        // return redirect()->route('usuarios.index');
         
         
         flash("Usuário Atualizado com sucesso!")->success();
