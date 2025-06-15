@@ -15,22 +15,6 @@ class Categoria extends Model
         'status',
     ];
     
-    public function rules()
-    {
-        return [
-            'nome'      =>  "required",
-            'descricao' =>  "required",
-            'imagem'       =>  "required"
-        ];
-    }
-    
-    public function rulesUpdate()
-    {
-        $data = $this->rules();
-        unset($data['imagem']);
-        return $data;
-    }
-    
     public function newInfo($data)
     {
         // dd($data);
