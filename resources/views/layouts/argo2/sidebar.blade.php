@@ -52,9 +52,9 @@ $site = Site::first();
       @can('roles.index')
       <li class="nav-item"><a class="nav-link {{ ($rota[0] == "roles" || $rota[0] == "rolePermission") ? "active" : ""}}" href="{{ route('roles.index') }}"><i class="fa fa-user-tag text-default"></i><span class="nav-link-text">Cargos</span></a></li>
       @endcan
-      @can('permissions.index')
+      {{-- @can('permissions.index')
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "permissions" ? "active" : ""}}" href="{{ route('permissions.index') }}"><i class="fa fa-sitemap text-default"></i><span class="nav-link-text">Permissão</span></a></li>
-      @endcan
+      @endcan --}}
       @can('sites.index')
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "sites" ? "active" : ""}}" href="{{ route('sites.index') }}"><i class="fa fa-info text-default"></i><span class="nav-link-text">Info do Site</span></a></li>
       @endcan
