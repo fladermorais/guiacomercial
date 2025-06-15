@@ -2,10 +2,12 @@
 
 @section('content')
 <div class="col">
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">
             <h3 >Lista de Permissões para {{$role->name}}</h3>
         </div>
+    </div>
+    <div class="card mb-4">
         <div class="card-body">
             <form class="row" action="{{route('rolePermission.store',$role->id)}}" method="post">
                 {{ csrf_field() }}
@@ -22,12 +24,13 @@
                 </div>
             </form>
         </div>
-        
+    </div>
+    
+    <div class="card mb-4">
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        
                         <th>Descrição</th>
                         <th>Permissão</th>
                         <th>Ação</th>
@@ -39,7 +42,6 @@
                         <td>{{ $permission->description }}</td>
                         <td>{{ $permission->name }}</td>
                         <td>
-                            
                             <form action="{{route('rolePermission.delete',[$role->id, $permission->id])}}" method="post">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}

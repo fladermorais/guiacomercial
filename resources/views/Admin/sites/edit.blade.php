@@ -2,17 +2,20 @@
 @section('content')
 
 <div class="col">
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">
-            <h3>Atualizar Categoria</h3>
+            <h3>Atualizar Dados do Site</h3>
         </div>
+    </div>
+
+    <div class="card">
         <div class="card-body">
             <form action="{{route('sites.update', $dados->id)}}" method="post" id="formulario" enctype="multipart/form-data">
                 {{csrf_field()}}
                 @method('PUT')
                 
                 <div class="form-group">
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-sm-8">
                             <label for="nome">Nome do site </label><br>
                             <input required class='form-control' type="text" id="nome" name="nome" value="{{ $dados->nome }}">
@@ -33,8 +36,7 @@
                             @endif
                         </div>
                     </div>
-
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-md-12">
                             <label for="descricao">Quem Somos</label>
                             <textarea class="form-control" name="quem_somos" id="descricao" cols="30" rows="5">{{ $dados->quem_somos }}</textarea>
@@ -48,10 +50,10 @@
                     </div>
 
                     <hr>
-                    <div class="form-row">
+                    <div class="row">
                         <h3>Mensagem da Home</h3>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="col-sm-12">
                             <label for="titulo">Título da Mensagem </label><br>
                             <input required class='form-control' type="text" id="titulo" name="titulo" value="{{ $dados->titulo }}">

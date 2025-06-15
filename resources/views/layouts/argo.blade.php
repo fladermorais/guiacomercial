@@ -8,94 +8,146 @@ $rota = explode('.', $route);
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <!-- Favicon -->
-    <link rel="icon" href="{{asset('Argo/img/brand/favicon.png') }}" type="image/png">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <!-- Icons -->
-    <link rel="stylesheet" href="{{ asset('Argo/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('Argo/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
-    <!-- Page plugins -->
-    <!-- Argon CSS -->
-    <link rel="stylesheet" href="{{ asset('Argo/css/argon.css?v=1.2.0') }}" type="text/css">
-    
-    
-    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('Argo2/assets/img/apple-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('Argo2/assets/img/favicon.png') }}">
+    
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    
+    <!-- Nucleo Icons -->
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+    
+    
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{{ asset('Argo2/assets/css/argon-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     
     <!-- Styles -->
     <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
     
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+
     {{-- Summernote --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script> --}}
     
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    {{-- Full Calendar --}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.css"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    {{-- CKEDITOR 5 --}}
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/43.0.0/ckeditor5-premium-features.css" />
     
 </head>
-<body>
+
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-100 bg-dark position-absolute w-100"></div>
     
-    @include('layouts/argo/sidebar')
+    @include('layouts/Argo2/sidebar')
     
-    
-    <div class="main-content" id="panel">
+    <main class="main-content position-relative border-radius-lg ">
+        @include('layouts/Argo2/header')
         
-        @include('layouts/argo/header')
-        
-        @include('flash::message')
-        <div class="container-fluid mt-4 ">
-            <div class="row">
-                {{-- @include('flash::message') --}}
+        <div class="container-fluid py-4">
+            <div class="row mt-4">
+                @include('flash::message')
                 @yield('content')
             </div>
-            {{-- </div> --}}
             
-            @include('layouts/argo/footer')
-            
-        </div> <!-- Fim da main-content -->
+        </div>
+
+        @include('layouts/Argo2/footer')
+
+    </main>
+    
+    <script src="{{ asset('Argo/vendor/js-cookie/js.cookie.js') }}"></script>
+    
+    <!--   Core JS Files   -->
+    <script src="{{ asset('Argo2/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('Argo2/assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('Argo2/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('Argo2/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('Argo2/assets/js/plugins/chartjs.min.js') }}"></script>
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{{ asset('Argo2/assets/js/argon-dashboard.min.js?v=2.1.0') }}"></script>
+
+
+    
+    {{-- JS Personalizados --}}
+    {{-- <script src="{{ asset('js/dropdownSidebar.js') }}"></script>
+    <script src="{{ asset('js/dropdownPesquisar.js') }}"></script>
+    <script src="{{ asset('js/dropdownFormulario.js') }}"></script>
+    <script src="{{ asset('js/permissionGroups.js') }}"></script>
+    <script src="{{ asset('js/presencas.js') }}"></script> --}}
+
+    <script src="{{ asset('js/dropdown.js') }}" defer></script>
+
+    {{-- Inserindo script para Gráficos  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    
+    
+    {{-- CKEDITOR 5 --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    
+    {{-- Incluindo Ckeditor --}}
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        var form = document.querySelector( '.ckeditor' );
+        if(form){
+            ClassicEditor.create( document.querySelector( '.ckeditor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+        }
         
-        <!-- Argon Scripts -->
-        <!-- Core -->
-        <script src="{{ asset('Argo/vendor/jquery/dist/jquery.min.js')}}"></script>
-        <script src="{{ asset('Argo/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('Argo/vendor/js-cookie/js.cookie.js') }}"></script>
-        <script src="{{ asset('Argo/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-        <script src="{{ asset('Argo/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
-        <!-- Optional JS -->
-        <script src="{{ asset('Argo/vendor/chart.js/dist/Chart.min.js') }}"></script>
-        <script src="{{ asset('Argo/vendor/chart.js/dist/Chart.extension.js') }}"></script>
-        <!-- Argon JS -->
-        <script src="{{ asset('Argo/js/argon.js?v=1.2.0') }}"></script>
+        var form2 = document.querySelector( '.ckeditor2' );
+        if(form2){
+            ClassicEditor.create( document.querySelector( '.ckeditor2' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+        }
         
-        
-        <!-- Scripts -->
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script> --}}
-        {{-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> --}}
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/dropdown.js') }}" defer></script>
-        {{-- <script src="{{ asset('js/botoes_fila.js') }}" defer></script> --}}
-        
-        
-        {{-- Inserindo script para Gráficos  --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-        
-        <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.ckeditor').ckeditor({
-                    height: 100,
-                });
-            });
-        </script>
-    </body>
-    </html>
+        var form3 = document.querySelector( '.ckeditor3' );
+        if(form3){
+            ClassicEditor.create( document.querySelector( '.ckeditor3' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+        }
+    </script>
+
+</body>
+</html>

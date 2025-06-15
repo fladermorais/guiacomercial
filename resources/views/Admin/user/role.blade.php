@@ -2,11 +2,12 @@
 @section('content')
 
 <div class="col">
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">
             <h3>Lista de Funções para {{$user->name}}</h3>
         </div>
-        
+    </div>
+    <div class="card mb-4">
         <div class="card-body">
             
             <form class="row" action="{{route('userRole.store',$user->id)}}" method="post">
