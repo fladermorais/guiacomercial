@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Gate;
-use App\User;
+use App\Models\User;
 use App\Models\Role;
 use Illuminate\Notifications\Notification;
 use App\Notifications\NewClient;

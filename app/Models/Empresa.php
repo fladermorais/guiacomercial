@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Traits\UploadArquivoTrait;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 

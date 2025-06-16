@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Notifications\Notification;
 use App\Notifications\NewAnnouncement;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends Controller
