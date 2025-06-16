@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
@@ -94,22 +94,6 @@ class User extends Authenticatable
         return config('app.slack');
     }
     
-    public function rules()
-    {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
-        ];
-    }
-    
-    public function rulesUpdate()
-    {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->id)]
-        ];
-    }
     
     public function newInfo($data)
     {

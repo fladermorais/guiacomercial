@@ -29,8 +29,10 @@ class UploadArquivoTrait {
     $path = public_path('/storage/'. $tipo . '/');
     $file = $arquivo;
     $arquivo = $path.$file;
-    if(file_exists($arquivo)){
-      unlink($arquivo);
+    if (is_dir($arquivo)) {
+      // rmdir($arquivo); // remove diretório vazio
+    } elseif (is_file($arquivo)) {
+      unlink($arquivo); // remove arquivo
     }
     
     return true;

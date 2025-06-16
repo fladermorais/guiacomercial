@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Traits\UploadArquivoTrait;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -51,17 +51,6 @@ class Empresa extends Model
         'feriado',
         'feriado_final',
     ];
-    
-    public function rules()
-    {
-        return [
-            'nome'      =>  ['required'],
-            'descricao' =>  ['required'],
-            'logo'      =>  ['required'],
-            'imagem'    =>  ['required'],
-            'telefone'  =>  ['required']
-        ];
-    }
     
     public function geraAlias( $str ) 
     {

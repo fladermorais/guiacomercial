@@ -21,15 +21,6 @@ class SubCategorias extends Model
     ];
     protected $table = 'sub_categorias';
     
-    public function rules()
-    {
-        return [
-            'nome'          =>  ['required'],
-            'categoria_id'  =>  ['required'],
-            'descricao'     =>  ['required'],
-        ];
-    }
-    
     public function categorias()
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');

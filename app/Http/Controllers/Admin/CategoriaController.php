@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoriaStoreRequest;
+use App\Http\Requests\CategoriaUpdateRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
 
 class CategoriaController extends Controller
 {
@@ -28,8 +29,6 @@ class CategoriaController extends Controller
             'palavra'   =>  $data['search'],
         ];
         return view('Admin.categorias.index', compact('categorias', 'resultado'));
-        
-        
     }
     
     public function create()
@@ -40,22 +39,16 @@ class CategoriaController extends Controller
         return view('Admin.categorias.create');
     }
     
-    public function store(Request $request)
+    public function store(CategoriaStoreRequest $request)
     {       
         if(Gate::denies('categorias.create')){
             abort(403, "Não Autorizado");
         }
         
         $data = $request->all();
-
+        
         $categoria = new Categoria();
         
-        $validator = Validator::make($data, $categoria->rules());
-        if($validator->fails()){
-            flash('Atente-se ao formulário')->warning();
-            return back()->withInput()->withErrors($validator);
-        }
-
         $response = $categoria->newInfo($data);
         if($response){
             flash('Categoria criada com sucesso!')->success();
@@ -79,7 +72,7 @@ class CategoriaController extends Controller
         return view('Admin.categorias.edit', compact('categoria'));
     }
     
-    public function update(Request $request, $id)
+    public function update(CategoriaUpdateRequest $request, $id)
     {
         if(Gate::denies('categorias.edit')){
             abort(403, "Não Autorizado");
@@ -91,12 +84,6 @@ class CategoriaController extends Controller
         }
         $data = $request->all();
         
-        $validator = Validator::make($data, $categoria->rulesUpdate());
-        if($validator->fails()){
-            flash('Atente-se ao formulário')->warning();
-            return back()->withInput()->withErrors($validator);
-        }
-
         $response = $categoria->updateInfo($data);
         if($response){
             flash('Categoria atualizada com sucesso!')->success();
@@ -132,6 +119,4 @@ class CategoriaController extends Controller
         }
         return redirect()->route('categorias.index');
     }
-    
-    
 }

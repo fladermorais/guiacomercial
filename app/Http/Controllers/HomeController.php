@@ -6,7 +6,7 @@ use App\Models\Categoria;
 use App\Models\Empresa;
 use App\Models\Site;
 use App\Models\SubCategorias;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

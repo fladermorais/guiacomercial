@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SiteUpdateRequest;
 use App\Models\Site;
 
 class SiteController extends Controller
@@ -14,7 +15,7 @@ class SiteController extends Controller
         return view('Admin.sites.edit', compact('dados'));
     }
 
-    public function update(Request $request)
+    public function update(SiteUpdateRequest $request)
     {
         $data = $request->all();
 
