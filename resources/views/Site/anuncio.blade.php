@@ -12,10 +12,10 @@
 <section class="breadcrumbs">
     <span><a href="{{ route('home') }}">Home /</a> </span>
     @if($breadcrumbs['categoria'] == $breadcrumbs['atual'])
-        <span>{{ $breadcrumbs['atual'] }}</span>
+    <span>{{ $breadcrumbs['atual'] }}</span>
     @else
-        <span><a href="{{ route('categorias', $breadcrumbs['categoria'] ) }}"> {{ $breadcrumbs['categoria'] }}</a> /</span>
-        <span>{{ $breadcrumbs['atual'] }}</span>
+    <span><a href="{{ route('categorias', $breadcrumbs['categoria'] ) }}"> {{ $breadcrumbs['categoria'] }}</a> /</span>
+    <span>{{ $breadcrumbs['atual'] }}</span>
     @endif
 </section>
 
@@ -61,7 +61,7 @@
                 
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
-            <img height="" width="auto" src="{{ asset('/storage/logo/'.$anuncio->img ) }}" class="attachment-full img-responsive" alt="{{ $anuncio->nome }}">
+                <img height="" width="auto" src="{{ asset('/storage/logo/'.$anuncio->img ) }}" class="attachment-full img-responsive" alt="{{ $anuncio->nome }}">
             </div>
         </div>
     </div>
@@ -143,17 +143,17 @@
 <section id="about-page-section-3">
     <div class="container">
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-        <img height="" width="auto" src="{{ asset('/storage/imagem/'.$anuncio->foto ) }}" class="attachment-full img-responsive" alt="{{ $anuncio->nome }}">
+            <img height="" width="auto" src="{{ asset('/storage/imagem/'.$anuncio->foto ) }}" class="attachment-full img-responsive" alt="{{ $anuncio->nome }}">
         </div>
         
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-align">
-
+            
             <div class="section-heading">
                 <div class="like">
                     <h4 class="flex-row"> <i class="fa fa-eye"></i>Visualizações <span>{{ $anuncio->view }}</span></h4>
                 </div>
             </div>
-
+            
             <div class="section-heading">
                 <div class="like">
                     <h4 class="flex-row"> <i class="fa fa-thumbs-up"></i>Curtidas <span>{{ $anuncio->like }}</span></h4>
@@ -173,6 +173,29 @@
         
     </div>
 </section>
+
+@if($anuncio->galerias && count($anuncio->galerias) > 0)
+<section id="about-page-section-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 text-align anuncio">
+                <div class="section-heading">
+                    <h2>Galeria de Fotos</h2>
+                </div>
+                <div class="section-body">
+                    <div class="img-anuncio">
+                        @foreach($anuncio->galerias as $foto)
+                        <a href="{{ asset('storage/galeria/' . $foto->path) }}" data-lightbox="galeria">
+                            <img src="{{ asset('storage/galeria/' . $foto->path) }}" alt="{{ $foto->path }}">
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
 
 @include('Site._pesquisa')
 
