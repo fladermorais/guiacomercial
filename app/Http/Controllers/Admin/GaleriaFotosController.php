@@ -7,17 +7,24 @@ use App\Http\Requests\GaleriaFotosRequest;
 use App\Models\Empresa;
 use App\Models\GaleriaFoto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class GaleriaFotosController extends Controller
 {
     public function show(Empresa $empresa)
     {
+        if(Gate::denies('galeria.index')){
+            abort(403, "Não Autorizado");
+        }
         return view('Admin.empresas.galeria', compact('empresa'));
     }
     
     public function store(GaleriaFotosRequest $request, Empresa $empresa)
     {
+        if(Gate::denies('galeria.store')){
+            abort(403, "Não Autorizado");
+        }
         $data = $request->all();
         
         $galeria = new GaleriaFoto;
@@ -30,6 +37,9 @@ class GaleriaFotosController extends Controller
 
     public function destroy(GaleriaFoto $galeria)
     {
+        if(Gate::denies('galeria.delete')){
+            abort(403, "Não Autorizado");
+        }
         $response = $galeria->deleteInfo();
         if($response){
             flash('Foto excluída com sucesso!')->success();

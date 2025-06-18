@@ -7,6 +7,7 @@
         </div>
     </div>
     
+    @can('galeria.store')
     <div class="card mb-4">
         <form action="{{ route('galeria.store', $empresa) }}" enctype="multipart/form-data" method="POST">
             @csrf
@@ -29,6 +30,7 @@
             </div>
         </form>
     </div>
+    @endcan
     
     <div class="card mb-4">
         <div class="card-header">
@@ -40,11 +42,13 @@
                 @foreach($empresa->galerias as $foto)
                 <div class="col-md-2 img-galeria">
                     <img src="{{ asset('storage/galeria/' . $foto->path) }}" alt="{{ $foto->titulo }}">
+                    @can('galeria.delete')
                     <form action="{{  route('galeria.destroy', $foto->id)}}" method="POST">
                         @method('DELETE')
                         @csrf
                         <button type="submit" onclick="return(confirm('Deseja realmente excluir esta foto?'))" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
                     </form>
+                    @endcan
                 </div>
                 @endforeach
             </div>

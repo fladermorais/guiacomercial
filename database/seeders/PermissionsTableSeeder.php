@@ -206,7 +206,7 @@ class PermissionsTableSeeder extends Seeder
             ]
         );
         Permission::firstOrCreate([
-            "name"  =>  "galeria.index",
+            "name"  =>  "galeria.delete",
             "description"   =>  "Galeria de Fotos - Remover foto",
             ]
         );
