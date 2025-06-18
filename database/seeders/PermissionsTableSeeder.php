@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Permission;
 
@@ -189,6 +191,23 @@ class PermissionsTableSeeder extends Seeder
         Permission::firstOrCreate([
             "name"  =>  "userRoles.store",
             "description"   =>  "Usuários - Criar Cargos",
+            ]
+        );
+
+        // Galeria de Fotos
+        Permission::firstOrCreate([
+            "name"  =>  "galeria.index",
+            "description"   =>  "Galeria de Fotos - Listar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "galeria.store",
+            "description"   =>  "Galeria de Fotos - Fazer upload de fotos",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "galeria.index",
+            "description"   =>  "Galeria de Fotos - Remover foto",
             ]
         );
     }
