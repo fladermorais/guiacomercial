@@ -28,11 +28,12 @@ class UploadArquivoTrait {
   {
     $path = public_path('/storage/'. $tipo . '/');
     $file = $arquivo;
-    $arquivo = $path.$file;
-    if (is_dir($arquivo)) {
-      // rmdir($arquivo); // remove diretório vazio
-    } elseif (is_file($arquivo)) {
-      unlink($arquivo); // remove arquivo
+    $photo = $path.$file;
+
+    if (is_dir($photo)) {
+      // rmdir($photo); // remove diretório vazio
+    } elseif (is_file($photo)) {
+      unlink($photo); // remove arquivo
     }
     
     return true;

@@ -52,6 +52,7 @@
                         <td>{{ $emp->like }}</td>
                         <td>{{ $emp->users->name }}</td>
                         <td class="action flex-row">
+                            <a class="btn btn-info btn-sm" href="{{route('galeria.show', $emp)}}" title="Galeria"><i class="fas fa-image"></i></a>
                             <a class="btn btn-primary btn-sm" href="{{route('empresas.edit', $emp->id)}}" title="Editar"><i class="fas fa-edit"></i></a>
                             <form action="{{route('empresas.delete', $emp->id)}}" method="POST">
                                 @csrf

@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -84,8 +87,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::post('/search', 'EmpresaController@search')->name('empresas.search');
 
 
-        Route::get('subcategoria/{id}', 'EmpresaController@subcategoria')->name('empresas.subcategoria');
-        Route::get('edit/subcategoria/{id}', 'EmpresaController@subcategoria')->name('empresas.subcategoria');
+        // Route::get('subcategoria/{id}', 'EmpresaController@subcategoria')->name('empresas.subcategoria');
+        // Route::get('edit/subcategoria/{id}', 'EmpresaController@subcategoria')->name('empresas.subcategoria');
 
         Route::get('/alterClient/{id}', 'EmpresaController@alterClient')->name('empresas.alterClient');
         Route::put('/alterClient/{id}', 'EmpresaController@alterClientUpdate')->name('empresas.alterClientUpdate');
@@ -95,5 +98,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::group(['prefix' => 'sites'], function() {
         Route::get('/', 'SiteController@index')->name('sites.index');
         Route::put('/update/{id}', 'SiteController@update')->name('sites.update');
+    });
+
+    Route::group(["prefix" => "galeria"], function() {
+        Route::get('/show/{empresa}', [\App\Http\Controllers\Admin\GaleriaFotosController::class, 'show'])->name('galeria.show');
+        Route::post('/store/{empresa}', [\App\Http\Controllers\Admin\GaleriaFotosController::class, 'store'])->name('galeria.store');
+        Route::delete('/{galeria}', [\App\Http\Controllers\Admin\GaleriaFotosController::class, 'destroy'])->name('galeria.destroy');
     });
 });
