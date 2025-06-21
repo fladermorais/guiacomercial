@@ -193,7 +193,7 @@ class PermissionsTableSeeder extends Seeder
             "description"   =>  "Usuários - Criar Cargos",
             ]
         );
-
+        
         // Galeria de Fotos
         Permission::firstOrCreate([
             "name"  =>  "galeria.index",
@@ -208,6 +208,23 @@ class PermissionsTableSeeder extends Seeder
         Permission::firstOrCreate([
             "name"  =>  "galeria.delete",
             "description"   =>  "Galeria de Fotos - Remover foto",
+            ]
+        );
+        
+        // Categorias de Notícias
+        Permission::firstOrCreate([
+            "name"  =>  "categoriaBlog.index",
+            "description"   =>  "Categoria Blog - Listar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "categoriaBlog.create",
+            "description"   =>  "Categoria Blog - Criar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "categoriaBlog.edit",
+            "description"   =>  "Categoria Blog - Editar",
             ]
         );
     }
