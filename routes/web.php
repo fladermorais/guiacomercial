@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CatBlogController;
+use App\Http\Controllers\Admin\NoticiasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -109,4 +110,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 
     Route::resource('categoriaBlog', CatBlogController::class);
     Route::post('categoriaBlog/search', [CatBlogController::class, 'search'])->name('categoriaBlog.search');
+
+    Route::resource('noticias', NoticiasController::class);
 });
