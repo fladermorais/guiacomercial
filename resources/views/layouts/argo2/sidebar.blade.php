@@ -36,15 +36,15 @@ $site = Site::first();
       @endcan
     </ul>
     
-    {{-- @canany(['categoriaBlog.index']) --}}
+    @canany(['categoriaBlog.index'])
     <hr class="my-3">
     <h6 class="navbar-heading p-0 text-muted"><span class="docs-normal">Blog</span></h6>
-    {{-- @endcanany --}}
+    @endcanany
     <!-- Nav items -->
     <ul class="navbar-nav">
-      {{-- @can('categoriaBlog.index') --}}
+      @can('categoriaBlog.index')
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "categoriaBlog" ? "active" : ""}}" href="{{ route('categoriaBlog.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Categorias</span></a></li>
-      {{-- @endcan --}}
+      @endcan
 
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "categoriaBlog" ? "active" : ""}}" href="{{ route('noticias.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Notícias</span></a></li>
     </ul>

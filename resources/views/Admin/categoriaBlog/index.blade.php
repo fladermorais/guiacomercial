@@ -14,7 +14,9 @@
                 </div>
             </form>
             
+            @can('categoriaBlog.create')
             <a class="btn btn-default float-right" href="{{route('categoriaBlog.create')}}">Nova Categoria</a>
+            @endcan
         </div>
 
         @if(isset($resultado))
@@ -42,7 +44,9 @@
                         <td>{{ $categoria->titulo }}</td>
                         <td><span class="badge text-bg-{{ $categoria->status == "I" ? "danger" : "success"}} ">{{ $categoria->status }}</span></td>
                         <td>
+                            @can('categoriaBlog.edit')
                             <a class="btn btn-primary btn-sm" href="{{route('categoriaBlog.edit', $categoria) }}" title="Editar"><i class="fas fa-edit"></i></a>
+                            @endcan
                             {{-- <a class="btn btn-danger btn-sm" href="{{route('categoriaBlo.active', $categoria->id)}}" title="Desabilitar"><i class="fas fa-trash-alt"></i></a> --}}
                         </td>
                     </tr>
