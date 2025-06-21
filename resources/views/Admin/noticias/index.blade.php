@@ -4,9 +4,9 @@
     <div class="card mb-4">
         <div class="card-header flex-row">
             <h3>Notícias</h3>
-            {{-- @can('noticias.create') --}}
+            @can('noticias.create')
             <a class="btn btn-default" href="{{route('noticias.create')}}">Nova Notícia</a>
-            {{-- @endcan --}}
+            @endcan
         </div>
     </div>
     
@@ -31,13 +31,13 @@
                         <td>{{ $noticia->views }}</td>
                         <td>{{ $noticia->status }}</td>
                         <td>
-                            {{-- @can('noticias.edit') --}}
+                            @can('noticias.edit')
                             <a class="btn btn-primary btn-sm" href="{{route('noticias.edit', $noticia->id)}}" title="Editar"><i class="fas fa-edit"></i></a>
-                            {{-- @endcan --}}
+                            @endcan
                             
-                            {{-- @can('noticias.delete') --}}
+                            @can('noticias.delete')
                             <a class="btn btn-danger btn-sm" href="{{route('noticias.destroy', $noticia->id)}}" title="Excluir"><i class="fas fa-trash"></i></a>
-                            {{-- @endcan --}}
+                            @endcan
                         </td>
                     </tr>
                     @empty

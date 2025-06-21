@@ -45,8 +45,9 @@ $site = Site::first();
       @can('categoriaBlog.index')
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "categoriaBlog" ? "active" : ""}}" href="{{ route('categoriaBlog.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Categorias</span></a></li>
       @endcan
-
-      <li class="nav-item"><a class="nav-link {{ $rota[0] == "categoriaBlog" ? "active" : ""}}" href="{{ route('noticias.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Notícias</span></a></li>
+      @can('noticias.index')
+      <li class="nav-item"><a class="nav-link {{ $rota[0] == "noticias" ? "active" : ""}}" href="{{ route('noticias.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Notícias</span></a></li>
+      @endcan
     </ul>
 
     @canany(['administradores.indexAdmin','usuarios.index'])
