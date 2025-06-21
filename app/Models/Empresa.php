@@ -52,6 +52,11 @@ class Empresa extends Model
         'feriado_final',
     ];
     
+    public function galerias()
+    {
+        return $this->hasMany(GaleriaFoto::class, 'empresa_id', 'id');
+    }
+
     public function geraAlias( $str ) 
     {
         $palavra1 = strtr(utf8_decode($str),utf8_decode("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ"),"SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");

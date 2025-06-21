@@ -28,3 +28,29 @@
     color: red !important;
     font-weight: bold;
 }
+
+.img-galeria {
+    width: 100%;
+    max-width: 200px;
+    height: 100%;
+    display: block;
+    padding: 5px;
+    margin: 5px;
+    position: relative;
+}
+
+.img-galeria img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.img-galeria button {
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    position: relative;
+    bottom: 40px;
+    left: 5px;
+}
