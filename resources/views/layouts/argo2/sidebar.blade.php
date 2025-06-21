@@ -13,7 +13,10 @@ $site = Site::first();
   </div>
   <hr class="horizontal dark mt-0">
   <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-    
+    @canany(['categorias.index', 'subCategorias.index', 'empresas.index'])
+    <hr class="my-3">
+    <h6 class="navbar-heading p-0 text-muted"><span class="docs-normal">Anúncios</span></h6>
+    @endcanany
     <ul class="navbar-nav">
       @can('categorias.index')
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "categorias" ? "active" : ""}}" href="{{ route('categorias.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Categorias</span></a></li>
@@ -33,6 +36,17 @@ $site = Site::first();
       @endcan
     </ul>
     
+    {{-- @canany(['categoriaBlog.index']) --}}
+    <hr class="my-3">
+    <h6 class="navbar-heading p-0 text-muted"><span class="docs-normal">Blog</span></h6>
+    {{-- @endcanany --}}
+    <!-- Nav items -->
+    <ul class="navbar-nav">
+      {{-- @can('categoriaBlog.index') --}}
+      <li class="nav-item"><a class="nav-link {{ $rota[0] == "categoriaBlog" ? "active" : ""}}" href="{{ route('categoriaBlog.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Categorias</span></a></li>
+      {{-- @endcan --}}
+    </ul>
+
     @canany(['administradores.indexAdmin','usuarios.index'])
     <hr class="my-3">
     <h6 class="navbar-heading p-0 text-muted"><span class="docs-normal">Usuários</span></h6>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CatBlogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -105,4 +106,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
         Route::post('/store/{empresa}', [\App\Http\Controllers\Admin\GaleriaFotosController::class, 'store'])->name('galeria.store');
         Route::delete('/{galeria}', [\App\Http\Controllers\Admin\GaleriaFotosController::class, 'destroy'])->name('galeria.destroy');
     });
+
+    Route::resource('categoriaBlog', CatBlogController::class);
+    Route::post('categoriaBlog/search', [CatBlogController::class, 'search'])->name('categoriaBlog.search');
 });

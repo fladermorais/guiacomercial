@@ -27,6 +27,7 @@
 .error {
     color: red !important;
     font-weight: bold;
+    font-size: 0.75rem;
 }
 
 .img-galeria {
