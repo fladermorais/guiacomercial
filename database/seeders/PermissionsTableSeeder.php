@@ -227,5 +227,22 @@ class PermissionsTableSeeder extends Seeder
             "description"   =>  "Categoria Blog - Editar",
             ]
         );
+
+        // Notícias
+        Permission::firstOrCreate([
+            "name"  =>  "noticias.index",
+            "description"   =>  "Notícias - Listar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "noticias.create",
+            "description"   =>  "Notícias - Criar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "noticias.edit",
+            "description"   =>  "Notícias - Editar",
+            ]
+        );
     }
 }
