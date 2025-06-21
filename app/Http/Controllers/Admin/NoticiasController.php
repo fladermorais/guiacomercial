@@ -8,23 +8,33 @@ use App\Http\Requests\NoticiasUpdateRequest;
 use App\Models\CatBlog;
 use App\Models\Noticias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class NoticiasController extends Controller
 {
     public function index()
     {
+        if(Gate::denies('noticias.index')){
+            abort(403, "Não Autorizado");
+        }
         $noticias = Noticias::orderBy('titulo')->get();
         return view('Admin.noticias.index', compact('noticias'));
     }
 
     public function create()
     {
+        if(Gate::denies('noticias.create')){
+            abort(403, "Não Autorizado");
+        }
         $categorias = CatBlog::where('status', 'A')->orderBy('titulo')->get();
         return view('Admin.noticias.create', compact('categorias'));
     }
 
     public function store(NoticiasStoreRequest $request)
     {
+        if(Gate::denies('noticias.create')){
+            abort(403, "Não Autorizado");
+        }
         $data = $request->all();
         $info = new Noticias;
         $response = $info->newInfo($data);
@@ -36,6 +46,9 @@ class NoticiasController extends Controller
 
     public function edit(Noticias $noticia)
     {
+        if(Gate::denies('noticias.edit')){
+            abort(403, "Não Autorizado");
+        }
         $categorias = CatBlog::where('status', 'A')->orderBy('titulo')->get();
         $info = $noticia;
         return view('Admin.noticias.edit', compact('categorias', 'info'));
@@ -43,6 +56,9 @@ class NoticiasController extends Controller
 
     public function update(NoticiasUpdateRequest $request, Noticias $noticia)
     {
+        if(Gate::denies('noticias.edit')){
+            abort(403, "Não Autorizado");
+        }
         $data = $request->all();
         $response = $noticia->updateInfo($data);
         if($response){
