@@ -46,7 +46,10 @@ $site = Site::first();
       <li class="nav-item"><a class="nav-link {{ $rota[0] == "categoriaBlog" ? "active" : ""}}" href="{{ route('categoriaBlog.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Categorias</span></a></li>
       @endcan
       @can('noticias.index')
-      <li class="nav-item"><a class="nav-link {{ $rota[0] == "noticias" ? "active" : ""}}" href="{{ route('noticias.index') }}"><i class="fa fa-list text-default"></i><span class="nav-link-text">Notícias</span></a></li>
+      <li class="nav-item"><a class="nav-link {{ $rota[0] == "noticias" ? "active" : ""}}" href="{{ route('noticias.index') }}"><i class="fa fa-bullhorn text-default"></i><span class="nav-link-text">Notícias</span></a></li>
+      @endcan
+      @can('menus.index')
+      <li class="nav-item"><a class="nav-link {{ $rota[0] == "menus" ? "active" : ""}}" href="{{ route('menus.index') }}"><i class="fa fa-stream text-default"></i><span class="nav-link-text">Item de menu</span></a></li>
       @endcan
     </ul>
 
