@@ -244,5 +244,27 @@ class PermissionsTableSeeder extends Seeder
             "description"   =>  "Notícias - Editar",
             ]
         );
+
+        // Itens de Menu
+        Permission::firstOrCreate([
+            "name"  =>  "menus.index",
+            "description"   =>  "Item de menu - Listar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "menus.create",
+            "description"   =>  "Item de menu - Criar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "menus.edit",
+            "description"   =>  "Item de menu - Editar",
+            ]
+        );
+        Permission::firstOrCreate([
+            "name"  =>  "menus.delete",
+            "description"   =>  "Item de menu - Deletar",
+            ]
+        );
     }
 }
