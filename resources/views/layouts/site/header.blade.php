@@ -18,6 +18,16 @@
                         <li class=""><a href="{{ route('home')}}">Home</a></li>
                         <li class=""><a href="{{ route('categorias')}}">Empresas</a></li>
                         <li class=""><a href="{{ route('logado')}}">Área do Anunciante</a></li>
+                        @if(isset($menus) && count($menus) > 0)
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                @foreach ($menus as $item)
+                                <li class=""><a href="{{ route('logado')}}">{{ $item->alias }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
