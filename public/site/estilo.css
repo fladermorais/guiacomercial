@@ -346,3 +346,74 @@ body #portfolio .portfolio-link{
 .img-anuncio img {
     width: 100%;
 }
+
+/* Notícias */
+#noticia {
+}
+
+#noticia h1 {
+    margin-top: 20px;
+}
+
+#noticia .noticia-img {
+    height: 500px !important;
+    width: auto !important;
+    overflow: hidden;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#noticia .noticia-img img {
+    display: block;
+    width: auto !important;
+    max-width: 100%;
+    max-height: 100% !important;
+    margin: 0 auto;
+}
+
+#noticia .noticia-content {
+    text-align: justify;
+    line-height: 3rem;
+    text-indent: 30px;
+}
+
+#noticia .noticia-link {
+    margin-top: 30px;
+    border-top: 2px solid #ccc;
+    text-align: left;
+    padding-top: 20px;
+}
+
+#noticia .noticia-link::before {
+    
+}
+
+.noticia-categoria {
+}
+
+.noticia-categoria h4 {
+    padding: 10px;
+    width: 100%;
+    background: #1abac8;
+    color: #fff
+}
+
+.noticia-categoria li {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid #1abac8;
+    margin-bottom: 5px;
+}
+
+.noticia-categoria li a {
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+.noticia-categoria li a:hover {
+    background: #1abac8;
+    color: #fff
+}

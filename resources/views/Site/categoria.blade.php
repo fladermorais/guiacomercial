@@ -4,7 +4,7 @@
 <section id="top_banner">
     <div class="banner">
         <div class="inner text-center">
-            <h2>{{ $categoria->nome }}</h2>
+            <h2>{{ $categoria->alias }}</h2>
         </div>
     </div>
 </section>
@@ -28,41 +28,42 @@
 </section>
 @endif
 
-@if($anuncios)
+@if(isset($noticias))
 <section id="portfolio">
     <div class="container">
         <div class="row">
-            @foreach($anuncios as $anuncio)
-            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 portfolio-item">
-                <div class="portfolio-one">
-                    <div class="portfolio-head">
-                        <div class="portfolio-img"><img alt="{{ $anuncio->nome }}" src="{{ asset('storage/logo/'.$anuncio->img)}}"></div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h5 class="title">{{ $anuncio->nome }}</h5>
-                        {{-- <p class="descricao">{{ Str::limit($anuncio->descricao,40) }}</p> --}}
-                        <p class="telefone"><b>Telefone: </b><a href="tel:{{ $anuncio->telefone }}">{{ $anuncio->telefone }}</a></p>
-                        <p class="categoria">
-                            <b>Categoria: </b>
-                            <a href="{{ route('categoria', $anuncio->categorias->alias) }}"> {{ $anuncio->categorias->nome }} </a>
-                            @if($anuncio->subcategoria_id)
-                            - 
-                            <a href="{{ route('subcategoria', $anuncio->subcategorias->alias)}}">{{ $anuncio->subcategorias->nome }}</a>
-                            @endif
-                        </p>
-                        <div class="flex-row detalhes">
-                            <a class="btn btn-default btn-sm" href="{{ route('anuncio', $anuncio->alias )}}">Visualizar</a>
-                            @if($anuncio->like > 0)
-                            <p class="curtir-home">
-                                <i class="fa fa-heart"></i> 
-                                <span>{{ strlen($anuncio->like) == 1 ? "0".$anuncio->like : $anuncio->like }}</span>
-                            </p>
-                            @endif
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach($noticias as $noticia)
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 portfolio-item">
+                        
+                        <div class="portfolio-one row">
+                            <div class="portfolio-head col-md-4">
+                                <div class="portfolio-img"><img alt="{{ $noticia->titulo }}" src="{{ asset('storage/noticias/'.$noticia->imagem)}}"></div>
+                            </div>
+                            <div class="col-md-8 d-flex">
+                                <div class="portfolio-content">
+                                    <h5 class="title">{{ $noticia->titulo }}</h5>
+                                    <p class="descricao">{{ Str::limit($noticia->descricao,250) }}</p>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('noticias', $noticia->titulo) }}" class="btn btn-sm btn-default">Ver mais</a>
+                                </div>
+                            </div>
                         </div>
+                        
                     </div>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
+            <div class="col-md-3 noticia-categoria">
+                <h4>Categorias</h4>
+                <ul>
+                    @foreach($categorias as $cat)
+                    <li><a href="{{ route('categoria', $cat->alias) }}">{{ $cat->alias }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 </section> 

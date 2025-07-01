@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Empresa;
 use App\Models\MenuConfig;
+use App\Models\Noticias;
 use App\Models\Site;
 use App\Models\SubCategorias;
 use App\Models\User;
@@ -47,30 +48,44 @@ class HomeController extends Controller
     {
         $dados = Site::find(1);
         $menus = MenuConfig::orderBy('ordem')->get();
-        $categoria = Categoria::where('alias', '=', $alias)->first();
-        $subcategorias = SubCategorias::join('empresas', 'empresas.subcategoria_id', 'sub_categorias.id')
-            ->select([
-                'sub_categorias.id as categoria',
-                'sub_categorias.img as img',
-                'sub_categorias.alias as alias',
-                'sub_categorias.nome as nome',
-                'sub_categorias.descricao as descricao'
-                ] )
-            ->where('empresas.categoria_id', $categoria->id)
-            ->groupBy('alias')
-            ->orderBy('sub_categorias.nome', 'asc')
-            ->get();
-        $anuncios = Empresa::where('categoria_id', $categoria->id)->orderBy('nome', 'asc')->get();
+        $categoria = MenuConfig::where('alias', 'like', $alias . '%')->first();
+        if(!isset($categoria)){
+            flash('Categoria não encontrada')->warning();
+            return back();
+        }
+        $noticias = Noticias::where('categoria_id', $categoria->categoria_id)->get();
         $breadcrumbs = [
             'home'      =>  '/',
             'categoria' =>  ucfirst($categoria->alias),
             'atual'     =>  ucfirst($categoria->alias)
         ];
-        return view('Site.categoria', compact('dados', 'categoria', 'anuncios', 'subcategorias', 'breadcrumbs', 'menus'));
+        $categorias = $menus;
+        return view('Site.categoria', compact('dados', 'categoria', 'breadcrumbs', 'menus', 'noticias', 'categorias'));
+    }
+
+    public function noticias($alias)
+    {
+        $dados = Site::find(1);
+        $menus = MenuConfig::orderBy('ordem')->get();
+        $noticia = Noticias::where('titulo', $alias)->first();
+        if(!isset($noticia)){
+            flash('Notícia não encontrada!')->warning();
+            return back();
+        }
+
+        $breadcrumbs = [
+            'home'      =>  '/',
+            'categoria' =>  ucfirst($noticia->categorias->titulo),
+            'atual'     =>  ucfirst($noticia->categorias->titulo)
+        ];
+        
+        $categorias = $menus;
+        return view('Site.noticia', compact('noticia', 'dados', 'menus', 'breadcrumbs', 'categorias'));
     }
 
     public function subcategoria($alias)
     {
+        dd("subcategoria");
         $dados = Site::find(1);
         $menus = MenuConfig::orderBy('ordem')->get();
         $categoria = SubCategorias::where('alias', '=', $alias)->first();
