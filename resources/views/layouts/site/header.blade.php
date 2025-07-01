@@ -23,7 +23,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 @foreach ($menus as $item)
-                                <li class=""><a href="{{ route('logado')}}">{{ $item->alias }}</a></li>
+                                <li class=""><a href="{{ route('categoria', $item->alias)}}">{{ $item->alias }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
