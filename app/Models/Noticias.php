@@ -12,6 +12,11 @@ class Noticias extends Model
     
     protected $fillable = ['alias', 'titulo', 'categoria_id', 'imagem', 'referencia', 'linkExterno', 'descricao', 'views', 'status', 'user_id', 'seo_titulo', 'seo_keywords', 'seo_canonical', 'seo_descricao' ];
     
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function categorias()
     {
         return $this->belongsTo(CatBlog::class, 'categoria_id', 'id');
