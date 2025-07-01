@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CatBlogController;
 use App\Http\Controllers\Admin\MenuConfigController;
 use App\Http\Controllers\Admin\NoticiasController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/categoria/{alias}', 'HomeController@categoria')->name('categoria');
+Route::get('/noticias/{alias}', [HomeController::class, 'noticias'])->name('noticias');
 Route::get('/subcategoria/{alias}', 'HomeController@subcategoria')->name('subcategoria');
 Route::get('/empresas', 'HomeController@categorias')->name('categorias');
 Route::get('/anuncio/{alias}', 'HomeController@anuncio')->name('anuncio');
