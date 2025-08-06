@@ -50,7 +50,9 @@ class HomeController extends Controller
     public function categoria($alias)
     {
         $dados = Site::find(1);
-        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
+        $queryCat = MenuConfig::orderBy('ordem');
+        $categorias = $queryCat->get();
+        $menus = $queryCat->where('exibe_menu', 'S')->get();
         $categoria = MenuConfig::where('alias', 'like', $alias . '%')->first();
         if(!isset($categoria)){
             flash('Categoria não encontrada')->warning();
@@ -62,14 +64,16 @@ class HomeController extends Controller
             'categoria' =>  ucfirst($categoria->alias),
             'atual'     =>  ucfirst($categoria->alias)
         ];
-        $categorias = $menus;
+        
         return view('Site.categoria', compact('dados', 'categoria', 'breadcrumbs', 'menus', 'noticias', 'categorias'));
     }
 
     public function noticias($alias)
     {
         $dados = Site::find(1);
-        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
+        $queryCat = MenuConfig::orderBy('ordem');
+        $categorias = $queryCat->get();
+        $menus = $queryCat->where('exibe_menu', 'S')->get();
         $noticia = Noticias::where('titulo', $alias)->first();
         if(!isset($noticia)){
             flash('Notícia não encontrada!')->warning();
@@ -82,7 +86,6 @@ class HomeController extends Controller
             'atual'     =>  ucfirst($noticia->categorias->titulo)
         ];
         
-        $categorias = $menus;
         return view('Site.noticia', compact('noticia', 'dados', 'menus', 'breadcrumbs', 'categorias'));
     }
 
