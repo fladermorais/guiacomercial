@@ -1,3 +1,7 @@
+body, #portfolio {
+    /* background-color: #f6f6f6 !important */
+}
+
 .perfil {
     display: flex;
     flex-direction: column;
@@ -417,3 +421,38 @@ body #portfolio .portfolio-link{
     background: #1abac8;
     color: #fff
 }
+
+.noticias {
+    /* border: 2px solid red; */
+    padding: 10px;
+    background: #ffffff !important;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.noticias-titulo {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.noticias-titulo::after {
+    display: block;
+    width: 600px;
+    height: 5px;
+    content: "";
+    border-bottom: 2px solid #1abac8;
+    text-align: center;
+    margin: 30px;
+
+}
+
+.noticias-conteudo {
+    background-color: #ffffff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.noticias-link a{
+    display: block;
+    text-align: right;
+    padding: 20px;
+} 

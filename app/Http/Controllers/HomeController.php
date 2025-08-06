@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatBlog;
 use App\Models\Categoria;
 use App\Models\Empresa;
 use App\Models\MenuConfig;
@@ -39,15 +40,17 @@ class HomeController extends Controller
     public function index()
     {   
         $dados = Site::find(1);
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
+        $categoriasMenu = MenuConfig::select('categoria_id')->where('exibe_home', 'S')->orderBy('ordem')->get()->toArray();
         $anuncios = Empresa::orderBy(DB::raw('RAND()'))->limit(6)->get();
-        return view('Site.welcome', compact('dados', 'anuncios', 'menus'));
+        $categorias = CatBlog::whereIn('id', $categoriasMenu)->with('noticias')->get();
+        return view('Site.welcome', compact('dados', 'anuncios', 'menus', 'categorias'));
     }
 
     public function categoria($alias)
     {
         $dados = Site::find(1);
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
         $categoria = MenuConfig::where('alias', 'like', $alias . '%')->first();
         if(!isset($categoria)){
             flash('Categoria não encontrada')->warning();
@@ -66,7 +69,7 @@ class HomeController extends Controller
     public function noticias($alias)
     {
         $dados = Site::find(1);
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
         $noticia = Noticias::where('titulo', $alias)->first();
         if(!isset($noticia)){
             flash('Notícia não encontrada!')->warning();
@@ -108,7 +111,7 @@ class HomeController extends Controller
             ];
         
         $anuncios = Empresa::inRandomOrder()->paginate(3);
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
         return view('Site.categorias', compact('dados', 'breadcrumbs', 'anuncios', 'menus'));
         
     }
@@ -125,7 +128,7 @@ class HomeController extends Controller
             'categoria' =>  ucfirst($anuncio->categorias->alias),
             'atual'     =>  $anuncio->nome
         ];
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
         return view('Site.anuncio', compact('dados', 'anuncio', 'breadcrumbs', 'menus'));
     }
 
@@ -144,7 +147,7 @@ class HomeController extends Controller
     {
         $dados = Site::find(1);
         $sobre = Site::first();
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
         return view('Site.sobre', compact('sobre', 'dados', 'menus'));
     }
 
@@ -157,7 +160,7 @@ class HomeController extends Controller
             'total'     =>  count($resultados),
             'palavra'   =>  $data['busca'],
         ];
-        $menus = MenuConfig::orderBy('ordem')->get();
+        $menus = MenuConfig::where('exibe_menu', 'S')->orderBy('ordem')->get();
         return view('Site.resultado', compact('resultados', 'dados', 'result', 'menus'));
     }
 }

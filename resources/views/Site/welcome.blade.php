@@ -38,7 +38,7 @@
                 <div class="portfolio-one">
                     <div class="portfolio-head">
                         <div class="portfolio-img">
-                        <img alt="{{ $anuncio->nome }}" src="{{ asset('storage/logo/'.$anuncio->img)}}">
+                            <img alt="{{ $anuncio->nome }}" src="{{ asset('storage/logo/'.$anuncio->img)}}">
                         </div>
                     </div>
                     <!-- End portfolio-head -->
@@ -72,5 +72,46 @@
             @endforeach
         </div>
     </div>
+</section>
+
+<section>
+    @foreach ($categorias as $cat)
+    <div class="container noticias">
+        <div class="row">
+            <div class="section-heading text-center">
+                <div class="col-md-12 col-xs-12">
+                    <h2 class="noticias-titulo">{{ $cat->titulo }}</h2>
+                </div>
+                
+                <div class="row">
+                    @foreach($cat->noticias as $noticia)  {{-- @foreach($cat->noticias as $noticia) --}}
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 portfolio-item">
+                        <div class="portfolio-one">
+                            <div class="portfolio-head">
+                                <div class="portfolio-img">
+                                    <img alt="{{ $noticia->titulo }}" src="{{ asset('storage/noticias/'.$noticia->imagem)}}">
+                                </div>
+                            </div>
+                            <!-- End portfolio-head -->
+                            <div class="portfolio-content">
+                                <h5 class="title">{{ $noticia->titulo }}</h5>
+                                {{-- <p class="descricao">{!! Str::limit($noticia->descricao,40) !!}</p> --}}
+
+                                <div class="noticias-link">
+                                    <a href="{{ route('noticias', $noticia->titulo )}}">Ler conteúdo</a>
+                                </div>
+                                
+                            </div>
+                            <!-- End portfolio-content -->
+                        </div>
+                        <!-- End portfolio-item -->
+                    </div>
+                    @endforeach
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    @endforeach
 </section>
 @endsection

@@ -11,6 +11,11 @@ class CatBlog extends Model
     protected $table = 'cat_blogs';
     protected $fillable = ['titulo', 'status'];
 
+    public function noticias()
+    {
+        return $this->hasMany(Noticias::class, 'categoria_id');
+    }
+
     public function newInfo($data)
     {
         $info = $this->create($data);
